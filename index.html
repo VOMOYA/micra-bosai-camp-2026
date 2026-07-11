@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マイクラ防災キャンプ2026｜きみのまちを、きみが守れ。【参加無料・8/8京都】</title>
+<meta name="description" content="現役京大生×探究学習の先生がつくる、小4〜中3向けの防災ワークショップ。マイクラのワールドにかくれた危険を見つけ、安全なまちをつくる冒険へ。2026年8月8日(土)京都経済センターKOIN、参加無料・先着順。">
+<meta property="og:title" content="マイクラ防災キャンプ2026｜きみのまちを、きみが守れ。">
+<meta property="og:description" content="マイクラのワールドにかくれた危険を見つけ、安全なまちをつくる冒険へ。2026年8月8日(土)京都経済センターKOIN。小4〜中3対象・参加無料・先着順。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0b1026;
+  --night2:#141a3a;
+  --dusk:#2a2350;
+  --grass:#6fc349;
+  --grass-hi:#8ee06a;
+  --dirt:#79553a;
+  --dirt-dark:#5c3f2a;
+  --stone:#8a8a8a;
+  --emerald:#17c964;
+  --emerald-dark:#0e8a45;
+  --gold:#ffcf4d;
+  --gold-dark:#d9a021;
+  --diamond:#5ce8e0;
+  --red:#e5484d;
+  --paper:#f5eedc;
+  --paper-line:#d9cba8;
+  --ink:#2b2417;
+  --white:#f4f6ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:var(--night);
+  color:var(--white);
+  line-height:1.9;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+.pixel{font-family:'DotGothic16',sans-serif;}
+.px-en{font-family:'Press Start 2P',monospace;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px;position:relative;z-index:2;}
+section{position:relative;padding:90px 0;}
+
+/* ============ スクロールXPバー ============ */
+.xpbar{
+  position:fixed;top:0;left:0;right:0;height:8px;z-index:100;
+  background:#1a1a1a;
+  border-bottom:2px solid #000;
+}
+.xpbar .fill{
+  height:100%;width:0%;
+  background:repeating-linear-gradient(90deg,#7dd63c 0 8px,#a4ef62 8px 16px);
+  box-shadow:0 0 10px #7dd63c88;
+  transition:width .1s linear;
+}
+.xpbar .lv{
+  position:absolute;right:10px;top:10px;
+  font-family:'Press Start 2P',monospace;font-size:8px;color:#a4ef62;
+  text-shadow:1px 1px 0 #000;
+}
+
+/* ============ 出現アニメーション ============ */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.on{opacity:1;transform:none;}
+.reveal.d1{transition-delay:.1s;}.reveal.d2{transition-delay:.22s;}.reveal.d3{transition-delay:.34s;}.reveal.d4{transition-delay:.46s;}
+
+/* ============ Minecraft風ボタン ============ */
+.mc-btn{
+  display:inline-block;position:relative;
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(18px,3.4vw,24px);
+  letter-spacing:.08em;
+  color:#fff;text-decoration:none;text-align:center;
+  padding:18px 46px;
+  background:linear-gradient(180deg,#27d977 0%,var(--emerald) 45%,var(--emerald-dark) 100%);
+  border:3px solid #000;
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,.45),
+    inset -3px -3px 0 rgba(0,0,0,.35),
+    0 6px 0 #000,
+    0 12px 30px rgba(23,201,100,.35);
+  text-shadow:2px 2px 0 rgba(0,0,0,.5);
+  image-rendering:pixelated;
+  transition:transform .08s,box-shadow .08s,filter .15s;
+}
+.mc-btn:hover{
+  filter:brightness(1.12);
+  transform:translateY(3px);
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,.45),
+    inset -3px -3px 0 rgba(0,0,0,.35),
+    0 3px 0 #000,
+    0 8px 20px rgba(23,201,100,.4);
+}
+.mc-btn small{display:block;font-size:12px;font-family:'Noto Sans JP',sans-serif;font-weight:700;letter-spacing:.05em;opacity:.95;}
+.mc-btn.gold{
+  background:linear-gradient(180deg,#ffe08a 0%,var(--gold) 45%,var(--gold-dark) 100%);
+  color:#4a3306;text-shadow:1px 1px 0 rgba(255,255,255,.4);
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,.55),
+    inset -3px -3px 0 rgba(0,0,0,.25),
+    0 6px 0 #000,
+    0 12px 30px rgba(255,207,77,.3);
+}
+.mc-btn.gold:hover{box-shadow:inset 3px 3px 0 rgba(255,255,255,.55),inset -3px -3px 0 rgba(0,0,0,.25),0 3px 0 #000,0 8px 20px rgba(255,207,77,.35);}
+/* きらめきエフェクト */
+.mc-btn .glint{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;
+}
+.mc-btn .glint::before{
+  content:"";position:absolute;top:-20%;left:-60%;width:36%;height:140%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-24deg);
+  animation:glint 3.2s ease-in-out infinite;
+}
+@keyframes glint{0%,60%{left:-60%;}100%{left:140%;}}
+
+/* ============ 見出し ============ */
+.sec-head{text-align:center;margin-bottom:52px;}
+.sec-en{
+  font-family:'Press Start 2P',monospace;
+  font-size:clamp(9px,1.6vw,12px);
+  color:var(--gold);letter-spacing:.2em;
+  display:block;margin-bottom:16px;
+  text-shadow:2px 2px 0 #000;
+}
+.sec-title{
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(28px,5.6vw,44px);
+  line-height:1.45;letter-spacing:.06em;
+  text-shadow:3px 3px 0 rgba(0,0,0,.6);
+}
+.sec-lead{margin-top:14px;font-size:clamp(13.5px,2.4vw,15.5px);color:#c6cbe8;}
+
+/* ============ 地形の区切り（ブロック段差） ============ */
+.terrain{
+  height:36px;position:relative;z-index:3;
+  background:
+    conic-gradient(from 90deg at 50% 50%, transparent 0 25%, currentColor 0 75%, transparent 0) 0 0/48px 36px repeat-x;
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  background:
+    radial-gradient(ellipse 55% 42% at 82% 16%, rgba(255,210,95,.30) 0%, transparent 62%),
+    radial-gradient(ellipse 90% 55% at 50% 115%, #52759e 0%, transparent 62%),
+    linear-gradient(180deg,#1a2438 0%,#2b3d5e 38%,#3f5a82 72%,#5d7fa8 100%);
+  overflow:hidden;
+  padding:90px 0 0;
+}
+/* 晴れ間からのぞくピクセル太陽（希望の光） */
+.sunburst{
+  position:absolute;top:8%;right:7%;width:78px;height:78px;
+  background:#ffd94d;
+  box-shadow:
+    inset -13px -11px 0 #f0b429,
+    0 0 46px 16px rgba(255,217,77,.4),
+    0 0 120px 50px rgba(255,190,60,.18);
+  image-rendering:pixelated;
+  clip-path:polygon(25% 0,75% 0,75% 12.5%,87.5% 12.5%,87.5% 25%,100% 25%,100% 75%,87.5% 75%,87.5% 87.5%,75% 87.5%,75% 100%,25% 100%,25% 87.5%,12.5% 87.5%,12.5% 75%,0 75%,0 25%,12.5% 25%,12.5% 12.5%,25% 12.5%);
+  animation:moonfloat 9s ease-in-out infinite;
+}
+@keyframes moonfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+/* ピクセル雨雲 */
+.scloud{
+  position:absolute;width:28px;height:28px;background:#33415c;
+  box-shadow:
+    28px 0 0 #33415c,56px 0 0 #33415c,84px 0 0 #33415c,112px 0 0 #33415c,
+    28px -28px 0 #3d4d6d,56px -28px 0 #3d4d6d,84px -28px 0 #3d4d6d;
+  opacity:.95;image-rendering:pixelated;
+  animation:drift var(--dr,75s) linear infinite;
+}
+@keyframes drift{from{transform:translateX(-180px);}to{transform:translateX(115vw);}}
+/* 稲光（ごく控えめ） */
+.lightning{
+  position:absolute;inset:0;background:#eaf2ff;opacity:0;
+  pointer-events:none;z-index:3;
+  animation:lstrike 11s linear infinite;
+}
+@keyframes lstrike{0%,93.4%,100%{opacity:0;}93.8%{opacity:.16;}94.2%{opacity:0;}94.8%{opacity:.26;}95.6%{opacity:0;}}
+/* ヒーローの雨（空から降る） */
+.hero .rain{z-index:1;}
+.hero .rain i{height:20px;opacity:.45;animation-name:fallhero;}
+@keyframes fallhero{to{transform:translateY(112vh);}}
+/* 守るべきまち（窓明かりの灯る家々） */
+.town{position:absolute;left:0;right:0;bottom:58px;height:120px;z-index:1;pointer-events:none;}
+.town .house{
+  position:absolute;bottom:0;background:#26314b;
+  box-shadow:inset -7px 0 0 rgba(0,0,0,.32);
+}
+.town .house::before{
+  content:"";position:absolute;top:-20px;left:-7px;right:-7px;height:20px;
+  background:#1b2338;clip-path:polygon(0 100%,50% 0,100% 100%);
+}
+.town .house::after{
+  content:"";position:absolute;left:12px;top:16px;width:11px;height:13px;
+  background:#ffd166;
+  box-shadow:
+    24px 0 0 #ffd166,0 26px 0 #ffd166,24px 26px 0 #ffd166,
+    0 0 16px 5px rgba(255,209,102,.4);
+  animation:winlite 5s ease-in-out infinite;
+}
+@keyframes winlite{0%,100%{filter:brightness(1);}50%{filter:brightness(.75);}}
+.town .house.sm::after{box-shadow:24px 0 0 #ffd166,0 0 14px 4px rgba(255,209,102,.4);}
+/* 地面をブロック格子に */
+.hero-ground .hill::after{
+  content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 22px,rgba(0,0,0,.14) 22px 24px),
+    repeating-linear-gradient(0deg,transparent 0 22px,rgba(0,0,0,.10) 22px 24px);
+}
+/* ゲームHUD（ハート＆経験値） */
+.hud{
+  position:absolute;top:26px;left:50%;transform:translateX(-50%);
+  z-index:5;display:flex;flex-direction:column;align-items:center;gap:5px;
+}
+.hud .hearts{display:flex;gap:3px;}
+.hud .hp{
+  width:17px;height:16px;background:#e5484d;
+  clip-path:polygon(50% 100%,12% 62%,0 44%,0 19%,12% 6%,31% 6%,50% 25%,69% 6%,88% 6%,100% 19%,100% 44%,88% 62%);
+  filter:drop-shadow(2px 2px 0 rgba(0,0,0,.6));
+  image-rendering:pixelated;
+}
+.hud .hp:last-child{animation:hpblink 1.4s steps(2) infinite;}
+@keyframes hpblink{50%{opacity:.35;}}
+.hud .hud-label{
+  font-family:'Press Start 2P',monospace;font-size:7px;color:#cdd6f5;
+  letter-spacing:.18em;text-shadow:1px 1px 0 #000;
+}
+/* スプラッシュテキスト（黄色の斜め文字） */
+.splash{
+  position:absolute;right:-2%;bottom:8px;z-index:6;
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(12px,2.4vw,18px);letter-spacing:.06em;
+  color:#ffff55;
+  text-shadow:2px 2px 0 #3f3f14;
+  transform:rotate(-14deg);
+  animation:splashpulse .4s ease-in-out infinite alternate;
+  pointer-events:none;white-space:nowrap;
+}
+@keyframes splashpulse{from{transform:rotate(-14deg) scale(1);}to{transform:rotate(-14deg) scale(1.1);}}
+@media(max-width:680px){.splash{right:2%;bottom:-14px;}}
+/* ピクセルツリー */
+.ptree{
+  position:absolute;width:18px;height:38px;background:#5c3f2a;z-index:2;
+  box-shadow:inset 4px 0 0 rgba(255,255,255,.08);
+}
+.ptree::before{
+  content:"";position:absolute;left:-19px;bottom:24px;width:56px;height:44px;
+  background:#2f7a24;
+  box-shadow:
+    inset -10px -10px 0 rgba(0,0,0,.28),
+    inset 10px 10px 0 rgba(255,255,255,.08);
+}
+/* 冒険者（後ろ姿・まちを見つめる） */
+.hero-char{
+  position:absolute;z-index:3;width:28px;
+  animation:charbob 3.2s ease-in-out infinite;
+  filter:drop-shadow(3px 4px 0 rgba(0,0,0,.35));
+  image-rendering:pixelated;
+}
+@keyframes charbob{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+.hero-char .head{width:20px;height:20px;margin:0 auto;background:#c68f5f;box-shadow:inset -6px 0 0 rgba(0,0,0,.18),inset 0 6px 0 #4a3423;}
+.hero-char .body{width:28px;height:20px;background:#2aa198;box-shadow:inset -8px 0 0 rgba(0,0,0,.22);}
+.hero-char .legs{
+  width:28px;height:16px;
+  background:linear-gradient(90deg,#3b4da0 0 12px,transparent 12px 16px,#3b4da0 16px 28px);
+}
+.hero-char .legs::after{content:"";display:block;width:100%;height:4px;margin-top:-4px;
+  background:linear-gradient(90deg,#555 0 12px,transparent 12px 16px,#555 16px 28px);}
+/* 浮遊ブロック */
+.fblock{
+  position:absolute;width:46px;height:46px;
+  image-rendering:pixelated;
+  animation:bob var(--dur,7s) ease-in-out infinite;
+  filter:drop-shadow(0 10px 14px rgba(0,0,0,.5));
+  z-index:1;
+}
+.fblock.grass-b{
+  background:
+    linear-gradient(180deg,var(--grass-hi) 0 30%,var(--dirt) 30% 100%);
+  box-shadow:inset -8px -8px 0 rgba(0,0,0,.22), inset 8px 8px 0 rgba(255,255,255,.12);
+}
+.fblock.stone-b{
+  background:linear-gradient(135deg,#9a9a9a 0 50%,#7c7c7c 50% 100%);
+  box-shadow:inset -8px -8px 0 rgba(0,0,0,.25), inset 8px 8px 0 rgba(255,255,255,.15);
+}
+.fblock.gold-b{
+  background:linear-gradient(135deg,#ffe08a 0 50%,#e0b23e 50% 100%);
+  box-shadow:inset -8px -8px 0 rgba(0,0,0,.22), inset 8px 8px 0 rgba(255,255,255,.3);
+}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-20px) rotate(3deg);}}
+/* 地面（手前の丘） */
+.hero-ground{
+  position:absolute;left:0;right:0;bottom:0;height:120px;z-index:2;pointer-events:none;
+}
+.hero-ground .hill{
+  position:absolute;bottom:0;left:0;right:0;height:100%;
+  background:
+    linear-gradient(180deg,var(--grass) 0 18px,var(--dirt) 18px 60%,var(--dirt-dark) 60% 100%);
+  clip-path:polygon(0 40%,6% 40%,6% 25%,14% 25%,14% 45%,26% 45%,26% 30%,38% 30%,38% 50%,52% 50%,52% 35%,64% 35%,64% 20%,74% 20%,74% 42%,86% 42%,86% 28%,94% 28%,94% 45%,100% 45%,100% 100%,0 100%);
+}
+/* 松明 */
+.torch{position:absolute;bottom:96px;width:12px;height:34px;z-index:3;}
+.torch::before{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:26px;
+  background:linear-gradient(180deg,#8a5a33,#5c3f2a);
+  box-shadow:inset 2px 0 0 rgba(255,255,255,.15);
+}
+.torch::after{
+  content:"";position:absolute;left:-2px;top:0;width:16px;height:12px;
+  background:#ffb31f;
+  box-shadow:0 0 18px 8px rgba(255,179,31,.55),0 0 50px 20px rgba(255,140,0,.25);
+  animation:flicker .18s steps(2) infinite alternate;
+}
+@keyframes flicker{from{opacity:.85;transform:scaleY(1);}to{opacity:1;transform:scaleY(1.18);}}
+.torch.t1{left:8%;}
+.torch.t2{right:10%;bottom:110px;}
+
+.hero-inner{text-align:center;position:relative;z-index:4;}
+.hero-tagline{
+  display:inline-block;
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(13px,2.6vw,17px);letter-spacing:.14em;
+  color:var(--diamond);
+  border:2px solid var(--diamond);
+  padding:8px 22px;margin-bottom:26px;
+  background:rgba(12,20,48,.6);
+  box-shadow:0 0 16px rgba(92,232,224,.25), inset 0 0 12px rgba(92,232,224,.1);
+  animation:pulse-border 2.4s ease-in-out infinite;
+}
+@keyframes pulse-border{0%,100%{box-shadow:0 0 10px rgba(92,232,224,.2),inset 0 0 8px rgba(92,232,224,.08);}50%{box-shadow:0 0 24px rgba(92,232,224,.5),inset 0 0 14px rgba(92,232,224,.18);}}
+.hero-copy{
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(24px,5vw,38px);
+  letter-spacing:.1em;line-height:1.6;
+  color:#fff;
+  text-shadow:
+    3px 3px 0 #14305c,
+    -2px -2px 0 #14305c,2px -2px 0 #14305c,-2px 2px 0 #14305c,
+    0 8px 22px rgba(10,40,90,.45);
+  margin-bottom:20px;
+}
+.hero-title{
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(46px,11vw,104px);
+  line-height:1.12;letter-spacing:.02em;
+  margin-bottom:8px;
+}
+.hero-title .l1{
+  display:block;
+  background:linear-gradient(180deg,#ffe9ad 0%,var(--gold) 40%,#e08b1d 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(4px 5px 0 rgba(0,0,0,.85));
+}
+.hero-title .l2{
+  display:block;
+  background:linear-gradient(180deg,#c8ffa9 0%,var(--grass) 45%,#3f9427 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(4px 5px 0 rgba(0,0,0,.85));
+}
+.hero-title .year{
+  font-family:'Press Start 2P',monospace;
+  font-size:.28em;vertical-align:middle;color:var(--night);
+  background:var(--diamond);padding:6px 14px;margin-left:14px;
+  box-shadow:3px 3px 0 #000;
+  display:inline-block;transform:rotate(-2deg);
+}
+.hero-sub{
+  font-size:clamp(14px,2.8vw,18px);font-weight:900;color:#dfe4ff;
+  letter-spacing:.1em;margin-bottom:30px;
+}
+.hero-sub .vs{color:var(--gold);}
+.hero-info{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:34px;
+}
+.hero-chip{
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(14px,2.8vw,19px);letter-spacing:.06em;
+  background:rgba(8,12,32,.7);
+  border:2px solid #3d4a8a;
+  padding:10px 20px;
+  box-shadow:3px 3px 0 rgba(0,0,0,.5);
+}
+.hero-chip b{color:var(--gold);}
+.hero-chip.free{border-color:var(--red);color:#ffd7d8;}
+.hero-chip.free b{color:#ff8a8e;}
+.hero-cta-area{margin-bottom:56px;}
+.hero-note{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:46px;
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(12.5px,2.5vw,15px);letter-spacing:.1em;
+  color:#fff;
+  background:rgba(8,12,32,.78);
+  border:2px solid var(--gold);
+  padding:8px 20px;
+  box-shadow:3px 3px 0 rgba(0,0,0,.5),0 0 14px rgba(255,207,77,.18);
+  text-shadow:1px 1px 0 rgba(0,0,0,.6);
+}
+.hero-note .emblem{font-size:1.15em;line-height:1;}
+.hero-note b{color:var(--gold);font-weight:400;}
+.scroll-hint{
+  position:absolute;bottom:132px;left:50%;transform:translateX(-50%);
+  font-family:'Press Start 2P',monospace;font-size:9px;color:#a9b4dd;
+  letter-spacing:.15em;z-index:4;
+  animation:hint 1.6s steps(2) infinite;
+}
+@keyframes hint{50%{transform:translate(-50%,8px);}}
+
+/* ============ ミッションブリーフィング（羊皮紙の書物） ============ */
+.sec-mission{background:linear-gradient(180deg,#20294e 0%,var(--night2) 30%,var(--night) 100%);}
+.sec-mission .terrain-top{color:var(--dirt-dark);position:absolute;top:-1px;left:0;right:0;transform:rotate(180deg);}
+.book{
+  max-width:820px;margin:0 auto;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 34px,rgba(0,0,0,.035) 34px 35px),
+    linear-gradient(135deg,#f8f1de 0%,var(--paper) 55%,#eadfc2 100%);
+  color:var(--ink);
+  border:4px solid #6b4f2e;
+  box-shadow:
+    inset 0 0 0 3px #c9b586,
+    inset 0 0 60px rgba(107,79,46,.18),
+    10px 12px 0 rgba(0,0,0,.45);
+  padding:52px 46px;
+  position:relative;
+}
+.book::before,.book::after{
+  content:"";position:absolute;width:18px;height:18px;background:#6b4f2e;
+}
+.book::before{top:-4px;left:-4px;clip-path:polygon(0 0,100% 0,0 100%);}
+.book::after{bottom:-4px;right:-4px;clip-path:polygon(100% 0,100% 100%,0 100%);}
+.book-stamp{
+  position:absolute;top:22px;right:26px;
+  font-family:'DotGothic16',sans-serif;font-size:12px;letter-spacing:.2em;
+  color:#a33;border:2px solid #a33;padding:4px 10px;transform:rotate(6deg);
+  opacity:.75;
+}
+.book h3{
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(21px,4vw,30px);letter-spacing:.12em;
+  text-align:center;margin-bottom:28px;color:#4a3306;
+}
+.book p{font-size:clamp(14.5px,2.5vw,16.5px);margin-bottom:20px;}
+.book .accent{font-weight:900;background:linear-gradient(transparent 62%,#ffd88a 62%);padding:0 2px;}
+.book .sign{text-align:right;font-family:'DotGothic16',sans-serif;font-size:14px;color:#6b4f2e;margin-top:8px;}
+@media(max-width:560px){.book{padding:40px 24px;}}
+
+/* ============ 危険→安全（世界の変化） ============ */
+.sec-world{background:var(--night);}
+.world-grid{display:grid;grid-template-columns:1fr 84px 1fr;gap:0;align-items:stretch;max-width:920px;margin:0 auto;}
+.world-card{
+  border:3px solid #000;
+  box-shadow:6px 6px 0 rgba(0,0,0,.5);
+  overflow:hidden;position:relative;
+}
+.world-card .scene{
+  height:200px;position:relative;overflow:hidden;
+}
+/* 危険な世界のシーン（CSSアート） */
+.scene.danger-scene{
+  background:linear-gradient(180deg,#3d1216 0%,#63201f 55%,#301014 100%);
+}
+.scene.danger-scene .building{
+  position:absolute;bottom:0;background:#4a4a55;box-shadow:inset -6px 0 0 rgba(0,0,0,.35);
+}
+.scene.danger-scene .b1{left:8%;width:70px;height:110px;transform:rotate(-7deg);transform-origin:bottom;}
+.scene.danger-scene .b2{left:40%;width:60px;height:80px;transform:rotate(4deg);transform-origin:bottom;}
+.scene.danger-scene .b3{right:10%;width:76px;height:126px;transform:rotate(-3deg);transform-origin:bottom;}
+.scene.danger-scene .crack{
+  position:absolute;bottom:0;left:0;right:0;height:26px;
+  background:
+    conic-gradient(from 90deg at 50% 50%, transparent 0 25%, #1c0b0d 0 75%, transparent 0) 0 0/34px 26px repeat-x;
+}
+.scene.danger-scene .fire{
+  position:absolute;width:14px;height:14px;background:#ff962b;
+  box-shadow:0 0 16px 8px rgba(255,110,20,.55);
+  animation:flicker .16s steps(2) infinite alternate;
+}
+.scene.danger-scene .f1{left:20%;top:34%;}
+.scene.danger-scene .f2{right:22%;top:22%;}
+.rain{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.rain i{
+  position:absolute;top:-20px;width:3px;height:14px;background:#7fb0ff;opacity:.65;
+  animation:fall var(--rd,1.1s) linear infinite;
+}
+@keyframes fall{to{transform:translateY(240px);}}
+/* 安全な世界のシーン */
+.scene.safe-scene{
+  background:linear-gradient(180deg,#7ec2ff 0%,#b9e2ff 55%,#8fd06a 100%);
+}
+.scene.safe-scene .sun{
+  position:absolute;top:14px;right:20px;width:38px;height:38px;background:#ffd94d;
+  box-shadow:0 0 24px 10px rgba(255,217,77,.5);
+}
+.scene.safe-scene .house{
+  position:absolute;bottom:24px;width:70px;height:56px;background:#e8dcc8;
+  box-shadow:inset -5px 0 0 rgba(0,0,0,.12);
+}
+.scene.safe-scene .house::before{
+  content:"";position:absolute;top:-24px;left:-8px;right:-8px;height:24px;background:#b3502e;
+  clip-path:polygon(0 100%,50% 0,100% 100%);
+}
+.scene.safe-scene .h1{left:12%;}
+.scene.safe-scene .h2{left:44%;bottom:24px;width:58px;height:48px;}
+.scene.safe-scene .h3{right:10%;}
+.scene.safe-scene .ground-g{
+  position:absolute;bottom:0;left:0;right:0;height:26px;
+  background:linear-gradient(180deg,var(--grass) 0 10px,var(--dirt) 10px 100%);
+}
+.world-card .label{
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(17px,3vw,22px);letter-spacing:.14em;text-align:center;
+  padding:14px 10px 12px;
+}
+.world-card.danger .label{background:#5e1a1d;color:#ffb9bb;}
+.world-card.safe .label{background:#1e5e2a;color:#c4f5b2;}
+.world-card .desc{
+  font-size:13.5px;padding:14px 18px 20px;color:#d8dcf2;line-height:1.85;
+}
+.world-card.danger{background:#25080b;}
+.world-card.safe{background:#0d2a14;}
+.world-arrow{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;z-index:2;
+}
+.world-arrow .ar{
+  font-family:'Press Start 2P',monospace;font-size:26px;color:var(--gold);
+  text-shadow:3px 3px 0 #000;
+  animation:arrowmove 1.2s steps(2) infinite;
+}
+.world-arrow .you{
+  font-family:'DotGothic16',sans-serif;font-size:13px;color:var(--diamond);
+  writing-mode:vertical-rl;letter-spacing:.3em;text-shadow:2px 2px 0 #000;
+}
+@keyframes arrowmove{50%{transform:translateX(6px);}}
+.world-caption{
+  text-align:center;margin-top:44px;
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(19px,3.8vw,28px);letter-spacing:.1em;line-height:1.9;
+  text-shadow:3px 3px 0 rgba(0,0,0,.6);
+}
+.world-caption .em{color:var(--gold);}
+@media(max-width:720px){
+  .world-grid{grid-template-columns:1fr;gap:8px;}
+  .world-arrow{flex-direction:row;padding:6px 0;}
+  .world-arrow .ar{transform:rotate(90deg);animation:none;}
+  .world-arrow .you{writing-mode:horizontal-tb;letter-spacing:.2em;}
+}
+
+/* ============ 4つのスキル（アイテムスロット風） ============ */
+.sec-skill{background:linear-gradient(180deg,var(--night) 0%,var(--night2) 100%);}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:22px;}
+.skill-card{
+  background:#1c2244;
+  border:3px solid #000;
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,.08),
+    inset -3px -3px 0 rgba(0,0,0,.4),
+    6px 6px 0 rgba(0,0,0,.45);
+  padding:28px 20px 24px;text-align:center;
+  transition:transform .15s;
+  position:relative;
+}
+.skill-card:hover{transform:translateY(-6px);}
+.skill-card .slot{
+  width:76px;height:76px;margin:0 auto 18px;
+  background:#12162e;
+  border:3px solid #000;
+  box-shadow:inset 3px 3px 0 rgba(0,0,0,.6),inset -3px -3px 0 rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+  font-size:38px;
+  position:relative;
+}
+.skill-card .slot::after{
+  content:attr(data-key);
+  position:absolute;right:3px;bottom:1px;
+  font-family:'Press Start 2P',monospace;font-size:8px;color:#8f9ad0;
+}
+.skill-card h3{
+  font-family:'DotGothic16',sans-serif;
+  font-size:22px;letter-spacing:.14em;margin-bottom:10px;
+}
+.skill-card:nth-child(1) h3{color:#ffb45e;}
+.skill-card:nth-child(2) h3{color:#7fc4ff;}
+.skill-card:nth-child(3) h3{color:#8ee06a;}
+.skill-card:nth-child(4) h3{color:#ff9d9f;}
+.skill-card p{font-size:13.5px;color:#c6cbe8;text-align:left;}
+.skill-badge{
+  margin-top:44px;text-align:center;
+}
+.skill-badge .inner{
+  display:inline-block;
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(15px,3vw,20px);letter-spacing:.1em;
+  color:var(--gold);
+  border:2px solid var(--gold);
+  background:rgba(255,207,77,.08);
+  padding:12px 30px;
+  box-shadow:4px 4px 0 rgba(0,0,0,.5);
+}
+
+/* ============ クエストマップ（当日の流れ） ============ */
+.sec-quest{background:var(--night2);}
+.quest-list{max-width:660px;margin:0 auto;position:relative;}
+.quest-list::before{
+  content:"";position:absolute;left:34px;top:20px;bottom:20px;width:6px;
+  background:repeating-linear-gradient(180deg,#3d4a8a 0 14px,transparent 14px 26px);
+}
+.quest-item{
+  display:flex;gap:22px;margin-bottom:26px;position:relative;align-items:flex-start;
+}
+.quest-item .wp{
+  flex-shrink:0;width:74px;height:74px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#232b58;
+  border:3px solid #000;
+  box-shadow:inset 3px 3px 0 rgba(255,255,255,.1),inset -3px -3px 0 rgba(0,0,0,.4),4px 4px 0 rgba(0,0,0,.5);
+  z-index:1;
+}
+.quest-item .wp .q{font-family:'Press Start 2P',monospace;font-size:7px;color:#8f9ad0;margin-bottom:4px;}
+.quest-item .wp .n{font-family:'DotGothic16',sans-serif;font-size:22px;color:var(--diamond);}
+.quest-item.boss .wp{background:#4a2360;}
+.quest-item.boss .wp .n{color:var(--gold);}
+.quest-item .card{
+  flex:1;background:#1c2244;border:3px solid #000;
+  box-shadow:5px 5px 0 rgba(0,0,0,.45);
+  padding:18px 22px;
+}
+.quest-item .card h3{
+  font-family:'DotGothic16',sans-serif;font-size:19px;letter-spacing:.08em;margin-bottom:4px;
+}
+.quest-item .card p{font-size:13.5px;color:#c6cbe8;}
+.quest-item .card .tag{
+  display:inline-block;font-size:11px;font-weight:900;
+  color:var(--night);background:var(--diamond);
+  padding:1px 10px;margin-left:8px;vertical-align:middle;
+}
+.quest-item.boss .card{background:#2b1a3d;}
+.quest-item.boss .card .tag{background:var(--gold);}
+.quest-time{
+  text-align:center;margin-bottom:40px;
+  font-family:'DotGothic16',sans-serif;font-size:clamp(15px,3vw,20px);letter-spacing:.08em;
+  color:#dfe4ff;
+}
+.quest-time b{color:var(--gold);}
+
+/* ============ パーティ（スタッフ） ============ */
+.sec-party{background:linear-gradient(180deg,var(--night2) 0%,var(--night) 100%);}
+.party-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:stretch;max-width:900px;margin:0 auto;}
+.party-card{
+  background:#1c2244;border:3px solid #000;
+  box-shadow:inset 3px 3px 0 rgba(255,255,255,.08),inset -3px -3px 0 rgba(0,0,0,.4),7px 7px 0 rgba(0,0,0,.5);
+  padding:34px 28px;text-align:center;position:relative;
+}
+.party-card .class{
+  font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.15em;
+  display:inline-block;padding:7px 14px;margin-bottom:18px;
+  border:2px solid;
+}
+.party-card.univ .class{color:var(--diamond);border-color:var(--diamond);background:rgba(92,232,224,.08);}
+.party-card.sensei .class{color:#8ee06a;border-color:#8ee06a;background:rgba(142,224,106,.08);}
+.party-card .avatar{
+  width:84px;height:84px;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;font-size:44px;
+  background:#12162e;border:3px solid #000;
+  box-shadow:inset 3px 3px 0 rgba(0,0,0,.6);
+}
+.party-card h3{font-family:'DotGothic16',sans-serif;font-size:clamp(18px,3vw,22px);letter-spacing:.06em;margin-bottom:4px;}
+.party-card .sub{font-size:12px;color:#8f9ad0;font-weight:700;margin-bottom:14px;}
+.party-card p{font-size:13.5px;color:#c6cbe8;text-align:left;}
+.party-card .lvl{
+  margin-top:16px;text-align:left;
+}
+.party-card .lvl .row{display:flex;align-items:center;gap:10px;font-size:11.5px;font-weight:900;color:#8f9ad0;margin-bottom:6px;}
+.party-card .lvl .bar{flex:1;height:10px;background:#12162e;border:2px solid #000;position:relative;}
+.party-card .lvl .bar i{position:absolute;inset:0;transform-origin:left;background:repeating-linear-gradient(90deg,var(--emerald) 0 6px,#26e07f 6px 12px);}
+.party-x{
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Press Start 2P',monospace;font-size:30px;color:var(--gold);
+  text-shadow:3px 3px 0 #000;
+}
+@media(max-width:720px){
+  .party-grid{grid-template-columns:1fr;}
+  .party-x{font-size:22px;padding:4px 0;}
+}
+
+/* ============ 保護者向け（信頼の白パート） ============ */
+.sec-parent{
+  background:
+    repeating-linear-gradient(0deg,transparent 0 34px,rgba(0,0,0,.02) 34px 35px),
+    #f7f4ec;
+  color:#2e2a22;
+}
+.sec-parent .terrain-top{color:var(--night);position:absolute;top:-1px;left:0;right:0;transform:rotate(180deg);}
+.sec-parent .terrain-bottom{color:var(--night);position:absolute;bottom:-1px;left:0;right:0;}
+.sec-parent .sec-title{color:#2e2a22;text-shadow:none;font-family:'Noto Sans JP',sans-serif;font-weight:900;letter-spacing:.04em;}
+.sec-parent .sec-en{color:#8a7a4d;text-shadow:none;}
+.sec-parent .sec-lead{color:#6b6455;}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px;margin-bottom:46px;}
+.trust-card{
+  background:#fff;border:1px solid #e3ddcc;border-radius:4px;
+  box-shadow:0 3px 14px rgba(60,50,20,.07);
+  padding:26px 22px;text-align:center;
+}
+.trust-card .icon{
+  width:56px;height:56px;margin:0 auto 14px;border-radius:50%;
+  background:#eef3e6;display:flex;align-items:center;justify-content:center;font-size:26px;
+}
+.trust-card h3{font-size:15.5px;font-weight:900;margin-bottom:8px;color:#3d5228;}
+.trust-card p{font-size:13px;color:#6b6455;text-align:left;}
+.parent-msg{
+  max-width:760px;margin:0 auto;
+  background:#fff;border-left:5px solid #7ba05b;border-radius:4px;
+  box-shadow:0 3px 14px rgba(60,50,20,.07);
+  padding:32px 34px;
+}
+.parent-msg h3{font-size:17px;font-weight:900;margin-bottom:14px;color:#3d5228;}
+.parent-msg p{font-size:14.5px;color:#4a443a;margin-bottom:14px;}
+.parent-msg p:last-child{margin-bottom:0;}
+.parent-msg .name{text-align:right;font-weight:900;font-size:14px;color:#3d5228;}
+.parent-msg .name small{font-weight:700;color:#8a8272;display:block;font-size:12px;}
+
+/* ============ 開催概要（インベントリ風） ============ */
+.sec-outline{background:var(--night);}
+.inv{
+  max-width:800px;margin:0 auto;
+  background:#c6c6c6;
+  border:4px solid #000;
+  box-shadow:
+    inset 4px 4px 0 #ffffff,
+    inset -4px -4px 0 #555555,
+    10px 10px 0 rgba(0,0,0,.5);
+  padding:26px;
+  color:#222;
+}
+.inv-title{
+  font-family:'DotGothic16',sans-serif;font-size:20px;letter-spacing:.12em;
+  color:#3b3b3b;margin-bottom:18px;
+}
+.inv table{width:100%;border-collapse:collapse;}
+.inv th,.inv td{
+  padding:13px 14px;font-size:14.5px;text-align:left;vertical-align:top;
+  border-bottom:2px solid #a8a8a8;
+}
+.inv tr:last-child th,.inv tr:last-child td{border-bottom:none;}
+.inv th{
+  width:118px;white-space:nowrap;
+  font-family:'DotGothic16',sans-serif;font-weight:400;letter-spacing:.1em;
+  color:#fff;background:#5a5a5a;
+  border-bottom:2px solid #777;
+  box-shadow:inset 2px 2px 0 rgba(255,255,255,.2),inset -2px -2px 0 rgba(0,0,0,.3);
+}
+.inv td b{color:#b3401f;}
+.inv td .note{display:block;font-size:12px;color:#666;margin-top:3px;}
+.inv td a{color:#1d5fa8;font-weight:900;}
+@media(max-width:560px){
+  .inv{padding:16px;}
+  .inv th{width:84px;padding:10px 8px;font-size:12.5px;}
+  .inv td{padding:10px 10px;font-size:13px;}
+}
+
+/* ============ アクセス ============ */
+.sec-access{background:linear-gradient(180deg,var(--night) 0%,var(--night2) 100%);}
+.access-card{
+  max-width:640px;margin:0 auto;text-align:center;
+  background:#1c2244;border:3px solid #000;
+  box-shadow:6px 6px 0 rgba(0,0,0,.5);
+  padding:38px 30px;
+}
+.access-card .place{
+  font-family:'DotGothic16',sans-serif;font-size:clamp(19px,3.6vw,25px);
+  letter-spacing:.08em;color:var(--gold);margin-bottom:10px;
+}
+.access-card p{font-size:14px;color:#c6cbe8;margin-bottom:22px;}
+.mc-btn.small{font-size:16px;padding:12px 32px;}
+
+/* ============ FAQ（チャット風） ============ */
+.sec-faq{background:var(--night2);}
+.faq-list{max-width:720px;margin:0 auto;}
+.faq-item{
+  border:3px solid #000;background:#1c2244;
+  box-shadow:5px 5px 0 rgba(0,0,0,.45);
+  margin-bottom:16px;
+}
+.faq-item summary{
+  cursor:pointer;list-style:none;
+  padding:18px 20px;font-weight:900;font-size:15px;
+  display:flex;gap:14px;align-items:flex-start;
+  transition:background .15s;
+}
+.faq-item summary:hover{background:#232b58;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary .q{
+  flex-shrink:0;font-family:'DotGothic16',sans-serif;
+  color:var(--night);background:var(--gold);
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  border:2px solid #000;font-size:16px;
+}
+.faq-item .a{
+  padding:2px 22px 20px 64px;font-size:14px;color:#c6cbe8;
+}
+.faq-item[open] summary .q{background:var(--diamond);}
+
+/* ============ 最終CTA ============ */
+.sec-cta{
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 0%, #2c3f78 0%, transparent 65%),
+    var(--night);
+  text-align:center;overflow:hidden;position:relative;
+}
+.cta-title{
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(26px,5.6vw,44px);letter-spacing:.08em;line-height:1.7;
+  text-shadow:3px 3px 0 rgba(0,0,0,.7);
+  margin-bottom:20px;
+}
+.cta-title .em{color:var(--gold);}
+.cta-deadline{
+  display:inline-block;
+  font-family:'DotGothic16',sans-serif;font-size:clamp(14px,2.8vw,18px);
+  letter-spacing:.1em;color:#ffd7d8;
+  border:2px solid var(--red);background:rgba(229,72,77,.12);
+  padding:10px 26px;margin-bottom:34px;
+  box-shadow:4px 4px 0 rgba(0,0,0,.5);
+  animation:pulse-red 2s ease-in-out infinite;
+}
+@keyframes pulse-red{0%,100%{box-shadow:4px 4px 0 rgba(0,0,0,.5),0 0 0 rgba(229,72,77,0);}50%{box-shadow:4px 4px 0 rgba(0,0,0,.5),0 0 22px rgba(229,72,77,.45);}}
+.cta-url{font-family:'Press Start 2P',monospace;font-size:10px;color:#8f9ad0;margin-top:18px;word-break:break-all;}
+.cta-line{font-size:13.5px;color:#c6cbe8;margin-top:30px;}
+.cta-hearts{margin-bottom:26px;font-size:22px;letter-spacing:6px;}
+.cta-hearts span{display:inline-block;animation:heartbeat 1.6s ease-in-out infinite;}
+.cta-hearts span:nth-child(2){animation-delay:.12s;}
+.cta-hearts span:nth-child(3){animation-delay:.24s;}
+.cta-hearts span:nth-child(4){animation-delay:.36s;}
+.cta-hearts span:nth-child(5){animation-delay:.48s;}
+@keyframes heartbeat{0%,100%{transform:scale(1);}12%{transform:scale(1.3);}}
+
+/* ============ キービジュアル（額縁） ============ */
+.keyvisual{max-width:860px;margin:56px auto 0;}
+.keyvisual .frame{
+  border:4px solid #6b4f2e;
+  box-shadow:
+    inset 0 0 0 3px #c9b586,
+    10px 12px 0 rgba(0,0,0,.45);
+  background:#12162e;
+  padding:8px;
+}
+.keyvisual img{width:100%;image-rendering:auto;}
+.keyvisual .cap{
+  text-align:center;margin-top:14px;
+  font-family:'DotGothic16',sans-serif;
+  font-size:clamp(13px,2.6vw,16px);letter-spacing:.12em;color:#c6cbe8;
+}
+
+/* ============ 講師紹介の追加パーツ ============ */
+.party-card .avatar.photo{
+  width:128px;height:128px;padding:0;overflow:hidden;font-size:0;
+  box-shadow:inset 0 0 0 0 transparent,4px 4px 0 rgba(0,0,0,.5);
+}
+.party-card .avatar.photo img{width:100%;height:100%;object-fit:cover;image-rendering:auto;}
+.party-card .avatar.logo{
+  width:128px;height:128px;padding:10px;font-size:0;
+  background:#fff;
+  box-shadow:inset 3px 3px 0 rgba(0,0,0,.12),4px 4px 0 rgba(0,0,0,.5);
+}
+.party-card .avatar.logo img{width:100%;height:100%;object-fit:contain;image-rendering:auto;}
+.party-card .org-logo{
+  display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 14px;
+}
+.party-card .org-logo img{height:40px;width:auto;background:#fff;border:2px solid #000;padding:2px 6px;}
+.x-link{
+  display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+  font-weight:900;font-size:13.5px;color:#fff;text-decoration:none;
+  background:#000;border:2px solid #3d4a8a;
+  padding:9px 18px;
+  box-shadow:3px 3px 0 rgba(0,0,0,.5);
+  transition:border-color .15s,transform .1s;
+}
+.x-link:hover{border-color:var(--diamond);transform:translateY(-2px);}
+.x-link .xmark{font-family:'Press Start 2P',monospace;font-size:12px;}
+
+/* ============ 公式LINE QRボックス ============ */
+.line-box{
+  max-width:460px;margin:36px auto 0;
+  display:flex;align-items:center;gap:20px;
+  background:#0d2a14;
+  border:3px solid #06a94e;
+  box-shadow:5px 5px 0 rgba(0,0,0,.5),0 0 22px rgba(6,169,78,.25);
+  padding:18px 22px;text-align:left;
+}
+.line-box .qr{
+  flex-shrink:0;width:104px;height:104px;background:#fff;
+  border:3px solid #000;padding:5px;
+}
+.line-box .qr img{width:100%;height:100%;}
+.line-box .t .head{
+  font-family:'DotGothic16',sans-serif;font-size:16px;letter-spacing:.08em;
+  color:#7df0a8;margin-bottom:4px;
+}
+.line-box .t p{font-size:12.5px;color:#c6e8cf;line-height:1.7;}
+@media(max-width:480px){.line-box{flex-direction:column;text-align:center;}.line-box .t p{text-align:left;}}
+
+/* ============ フッター ============ */
+footer{background:#07090f;color:#8a90b5;padding:50px 0 130px;font-size:12px;border-top:4px solid #000;}
+.footer-orgs{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;margin-bottom:28px;text-align:center;}
+.footer-orgs .org b{display:block;color:#dfe4ff;font-size:13px;margin-bottom:2px;font-family:'DotGothic16',sans-serif;letter-spacing:.1em;}
+.footer-note{max-width:720px;margin:0 auto 16px;line-height:1.8;opacity:.75;}
+.footer-copy{text-align:center;opacity:.55;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.1em;margin-top:20px;}
+
+/* ============ ホットバー（追従CTA） ============ */
+.hotbar{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:90;
+  display:flex;align-items:center;gap:6px;
+  background:rgba(10,10,14,.88);
+  border:3px solid #000;
+  box-shadow:inset 2px 2px 0 rgba(255,255,255,.14),inset -2px -2px 0 rgba(0,0,0,.6),0 6px 20px rgba(0,0,0,.6);
+  padding:7px;
+}
+.hotbar .slot{
+  width:48px;height:48px;
+  background:#1d1d26;
+  border:2px solid #000;
+  box-shadow:inset 2px 2px 0 rgba(0,0,0,.7),inset -2px -2px 0 rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.hotbar .slot.info{
+  width:auto;padding:0 12px;flex-direction:column;justify-content:center;
+  font-size:10px;font-weight:900;color:#dfe4ff;line-height:1.5;white-space:nowrap;
+}
+.hotbar .slot.info b{color:var(--gold);}
+.hotbar .apply{
+  font-family:'DotGothic16',sans-serif;
+  font-size:17px;letter-spacing:.08em;color:#fff;text-decoration:none;
+  background:linear-gradient(180deg,#27d977,var(--emerald-dark));
+  border:2px solid #000;
+  box-shadow:inset 2px 2px 0 rgba(255,255,255,.4),inset -2px -2px 0 rgba(0,0,0,.35);
+  padding:11px 22px;
+  text-shadow:1px 1px 0 rgba(0,0,0,.5);
+  animation:apply-pulse 2s ease-in-out infinite;
+}
+@keyframes apply-pulse{0%,100%{filter:brightness(1);}50%{filter:brightness(1.18);}}
+.hotbar .apply:hover{filter:brightness(1.25)!important;}
+@media(max-width:600px){
+  .hotbar .slot:not(.info){display:none;}
+}
+
+/* ============ 実績トースト ============ */
+.toast{
+  position:fixed;top:24px;right:-420px;z-index:110;
+  display:flex;align-items:center;gap:14px;
+  background:#1d1d26;
+  border:3px solid #000;
+  box-shadow:inset 2px 2px 0 rgba(255,255,255,.12),6px 6px 0 rgba(0,0,0,.5);
+  padding:12px 20px 12px 12px;
+  transition:right .5s cubic-bezier(.2,.9,.3,1.2);
+}
+.toast.show{right:20px;}
+.toast .t-icon{
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:24px;
+  background:#12162e;border:2px solid #000;
+}
+.toast .t-body .t-head{font-family:'DotGothic16',sans-serif;font-size:12px;color:var(--gold);letter-spacing:.1em;}
+.toast .t-body .t-text{font-size:13px;font-weight:900;color:#fff;}
+
+/* クリック時のブロック破壊パーティクル */
+.burst{position:fixed;width:8px;height:8px;pointer-events:none;z-index:120;image-rendering:pixelated;}
+</style>
+</head>
+<body>
+
+<!-- XPバー -->
+<div class="xpbar"><div class="fill" id="xpfill"></div><span class="lv px-en" id="xplv">LV.0</span></div>
+
+<!-- 実績トースト -->
+<div class="toast" id="toast">
+  <div class="t-icon">🏆</div>
+  <div class="t-body">
+    <div class="t-head">実績を解除しました！</div>
+    <div class="t-text">冒険の準備が整った</div>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="hero">
+  <div class="rain" data-rain="30"></div>
+  <div class="lightning"></div>
+  <div class="sunburst"></div>
+  <div class="scloud" style="top:11%;left:-6%;--dr:80s;"></div>
+  <div class="scloud" style="top:22%;left:-30%;--dr:95s;scale:.7;"></div>
+  <div class="scloud" style="top:5%;left:-55%;--dr:70s;scale:1.2;"></div>
+  <div class="fblock grass-b" style="top:18%;left:6%;--dur:8s;"></div>
+  <div class="fblock stone-b" style="top:32%;right:5%;--dur:6.5s;width:34px;height:34px;"></div>
+  <div class="fblock gold-b" style="top:60%;left:10%;--dur:7.5s;width:28px;height:28px;"></div>
+  <div class="town">
+    <div class="house" style="left:6%;width:74px;height:70px;"></div>
+    <div class="house sm" style="left:16%;width:58px;height:48px;"></div>
+    <div class="house" style="left:38%;width:66px;height:60px;"></div>
+    <div class="house sm" style="right:26%;width:56px;height:46px;"></div>
+    <div class="house" style="right:8%;width:78px;height:76px;"></div>
+  </div>
+  <div class="ptree" style="left:4%;bottom:92px;"></div>
+  <div class="ptree" style="right:3%;bottom:100px;scale:.8;"></div>
+  <div class="hero-char" style="right:17%;bottom:88px;">
+    <div class="head"></div><div class="body"></div><div class="legs"></div>
+  </div>
+  <div class="torch t1"></div>
+  <div class="torch t2"></div>
+  <div class="hero-ground"><div class="hill"></div></div>
+
+  <div class="hud">
+    <div class="hearts">
+      <span class="hp"></span><span class="hp"></span><span class="hp"></span><span class="hp"></span><span class="hp"></span>
+      <span class="hp"></span><span class="hp"></span><span class="hp"></span><span class="hp"></span><span class="hp"></span>
+    </div>
+    <span class="hud-label">BOSAI CAMP 2026</span>
+  </div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-tagline pixel">▶ NEW WORLD ｜ 現役京大生 × 探究学習の先生がつくる</div>
+    <p class="hero-copy">きみのまちを、きみが守れ。</p>
+    <h1 class="hero-title" style="position:relative;">
+      <span class="l1">マイクラ防災</span>
+      <span class="l2">キャンプ<span class="year">2026</span></span>
+      <span class="splash">マイクラ未経験でも大丈夫！</span>
+    </h1>
+    <p class="hero-sub">マイクラで挑む、防災サバイバル・ワークショップ<span class="vs">｜小4〜中3対象</span></p>
+    <div class="hero-info">
+      <span class="hero-chip pixel"><b>8.8</b>(土) 第1部10:00〜/第2部13:30〜</span>
+      <span class="hero-chip pixel">京都経済センター <b>KOIN</b></span>
+      <span class="hero-chip pixel free">参加費 <b>無料</b></span>
+    </div>
+    <div class="hero-cta-area">
+      <a class="mc-btn" href="https://forms.gle/EvSfuYTbUWDWj28R6" target="_blank" rel="noopener">
+        <span class="glint"></span>
+        ▶ 冒険に参加する<small>申込フォームへ（先着順・各部約25名）</small>
+      </a>
+      <div><p class="hero-note"><span class="emblem">🏛️</span><b>後援</b>京都市教育委員会</p></div>
+    </div>
+  </div>
+  <div class="scroll-hint px-en">▼ SCROLL</div>
+</header>
+
+<!-- ================= ミッションブリーフィング ================= -->
+<section class="sec-mission">
+  <div class="terrain terrain-top"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** MISSION BRIEFING ***</span>
+      <h2 class="sec-title">きみに、依頼が届いている。</h2>
+    </div>
+    <div class="book reveal d1">
+      <span class="book-stamp">極秘依頼</span>
+      <h3>― 依頼書 ―</h3>
+      <p>このワールドの中には、地震や水害などの<span class="accent">「危険」がかくれている</span>。まずは探検しながら、どこが危ないのかを見つけてほしい。</p>
+      <p>きみのミッションは、危険な場所を見つけて<span class="accent">「どうすれば安全になる？」</span>を考え、マイクラの中で<span class="accent">本当に役立つ対策をつくること</span>。</p>
+      <p>グループの仲間と相談しながら、ひらめいたアイデアをどんどん形にしていこう。チームで協力すると、もっとすごい街ができる！</p>
+      <p class="sign">依頼主：マイクラ防災キャンプ運営一同<br>2026年8月8日（土）京都経済センターKOINにて待つ。</p>
+    </div>
+    <div class="keyvisual reveal d2">
+      <div class="frame"><img src="assets/hero_banner.png" alt="マイクラ防災キャンプ2026 — 災害のまちと守られたまちを見わたす冒険者たち" loading="lazy"></div>
+      <p class="cap">▲ きみを待つ「マイクラ防災キャンプ」の世界（KUMC × KAEL）</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 世界の変化（危険→安全） ================= -->
+<section class="sec-world">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** YOUR MISSION ***</span>
+      <h2 class="sec-title">危険なまちを、<br>安心安全なまちに変えろ。</h2>
+    </div>
+    <div class="world-grid">
+      <div class="world-card danger reveal d1">
+        <div class="scene danger-scene">
+          <div class="rain" data-rain="14"></div>
+          <div class="building b1"></div><div class="building b2"></div><div class="building b3"></div>
+          <div class="fire f1"></div><div class="fire f2"></div>
+          <div class="crack"></div>
+        </div>
+        <div class="label">⚠ 危険なまち</div>
+        <div class="desc">地震でかたむいた建物、あふれそうな川、燃えひろがる火…。このまちには危険がいっぱい。どこが危ないか、見つけられるか？</div>
+      </div>
+      <div class="world-arrow reveal d2">
+        <span class="ar">▶</span>
+        <span class="you">きみの出番だ</span>
+      </div>
+      <div class="world-card safe reveal d3">
+        <div class="scene safe-scene">
+          <div class="sun"></div>
+          <div class="house h1"></div><div class="house h2"></div><div class="house h3"></div>
+          <div class="ground-g"></div>
+        </div>
+        <div class="label">✔ 安心安全なまち</div>
+        <div class="desc">ひなん場所、丈夫な堤防、安全な避難路…。きみのアイデアと仲間の力で、災害に負けないまちをつくりあげよう！</div>
+      </div>
+    </div>
+    <p class="world-caption reveal">正解はひとつじゃない。<br><span class="em">きみだけの防災アイデア</span>が、このまちを救う。</p>
+  </div>
+</section>
+
+<!-- ================= 4つのスキル ================= -->
+<section class="sec-skill">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** SKILL TREE ***</span>
+      <h2 class="sec-title">冒険で手に入る、4つのスキル</h2>
+      <p class="sec-lead">見つける → 考える → つくる → 伝える。探究学習のサイクルをまるごと体験します。</p>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card reveal d1">
+        <div class="slot" data-key="01">🔍</div>
+        <h3>見つける</h3>
+        <p>身のまわりの危険を自分で見つける。「ここ、あぶなくない？」という気づきが冒険のはじまり。</p>
+      </div>
+      <div class="skill-card reveal d2">
+        <div class="slot" data-key="02">💡</div>
+        <h3>考える</h3>
+        <p>危ない理由、良くする方法を考える。「なぜ？」「どうすれば？」を自分の頭で。</p>
+      </div>
+      <div class="skill-card reveal d3">
+        <div class="slot" data-key="03">⛏️</div>
+        <h3>つくる</h3>
+        <p>マインクラフトでアイデアを形にする。思いついた対策を、ブロックで実際に建てて試す。</p>
+      </div>
+      <div class="skill-card reveal d4">
+        <div class="slot" data-key="04">📣</div>
+        <h3>伝える</h3>
+        <p>自分の考えを仲間に発表し、共有する。「なぜそう作ったのか」を自分の言葉で。</p>
+      </div>
+    </div>
+    <div class="skill-badge reveal">
+      <span class="inner">✦ アントレプレナーシップにつながる4つの力 ✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= クエストマップ ================= -->
+<section class="sec-quest">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** QUEST MAP ***</span>
+      <h2 class="sec-title">当日の冒険マップ</h2>
+    </div>
+    <p class="quest-time reveal">第1部 <b>10:00〜12:30</b> ／ 第2部 <b>13:30〜16:00</b>（15分前集合）</p>
+    <div class="quest-list">
+      <div class="quest-item reveal">
+        <div class="wp"><span class="q">QUEST</span><span class="n">01</span></div>
+        <div class="card"><h3>仲間と出会う<span class="tag">アイスブレイク</span></h3><p>まずはグループの仲間と打ちとける。今日いっしょに冒険するパーティ結成！</p></div>
+      </div>
+      <div class="quest-item reveal">
+        <div class="wp"><span class="q">QUEST</span><span class="n">02</span></div>
+        <div class="card"><h3>防災の知恵を授かる<span class="tag">レクチャー</span></h3><p>冒険に出る前に、防災の基本知識を装備しよう。探究学習の先生が楽しく伝授。</p></div>
+      </div>
+      <div class="quest-item reveal">
+        <div class="wp"><span class="q">QUEST</span><span class="n">03</span></div>
+        <div class="card"><h3>危険をさがす探検へ<span class="tag">課題発見</span></h3><p>ワールドを探検して危険を発見。「どうすれば安全になる？」を仲間と作戦会議。</p></div>
+      </div>
+      <div class="quest-item boss reveal">
+        <div class="wp"><span class="q">MAIN</span><span class="n">04</span></div>
+        <div class="card"><h3>まちを守る対策をつくる<span class="tag">制作40分</span></h3><p>いよいよメインクエスト。ひらめいたアイデアをブロックで形に。京大生スタッフが操作も考え方もサポート！</p></div>
+      </div>
+      <div class="quest-item reveal">
+        <div class="wp"><span class="q">QUEST</span><span class="n">05</span></div>
+        <div class="card"><h3>冒険の成果を発表する<span class="tag">グループ発表</span></h3><p>「なぜそう作ったのか」を自分の言葉で仲間に発表。きみの作品がみんなの学びになる。</p></div>
+      </div>
+      <div class="quest-item reveal">
+        <div class="wp"><span class="q">CLEAR</span><span class="n">🏆</span></div>
+        <div class="card"><h3>ミッションクリア！</h3><p>今日の学びをふりかえって冒険は終了。おうちでも話したくなる発見を持ち帰ろう。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= パーティ（スタッフ） ================= -->
+<section class="sec-party">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** PARTY MEMBERS ***</span>
+      <h2 class="sec-title">講師紹介｜きみをサポートする仲間たち</h2>
+      <p class="sec-lead">マインクラフトが初めてでも大丈夫。わからないことは何でも聞いてOK！</p>
+    </div>
+    <div class="party-grid">
+      <div class="party-card univ reveal d1">
+        <span class="class">KYOTO UNIV.</span>
+        <div class="avatar logo"><img src="assets/kumc_logo.png" alt="京大マインクラフト同好会KUMC ロゴ" loading="lazy"></div>
+        <h3>京大マインクラフト同好会<br>KUMC</h3>
+        <div class="sub">現役京大生スタッフ</div>
+        <p>マイクラを知りつくした京大生たちが、操作も、考え方も、やさしくしっかりサポート。京大キャンパスの再現マップなど数々のワールドを制作してきたチームが、本イベントの課題ワールドの設計・構築を手がけています。</p>
+        <div class="lvl">
+          <div class="row"><span>マイクラ力</span><div class="bar"><i style="width:98%"></i></div></div>
+          <div class="row"><span>サポート力</span><div class="bar"><i style="width:92%"></i></div></div>
+        </div>
+        <a class="x-link" href="https://x.com/KUMC_X" target="_blank" rel="noopener"><span class="xmark">𝕏</span>@KUMC_X ｜活動はXで公開中</a>
+      </div>
+      <div class="party-x reveal d2">×</div>
+      <div class="party-card sensei reveal d3">
+        <span class="class">TANKYU SENSEI</span>
+        <div class="avatar photo"><img src="assets/kitada_profile.jpg" alt="北田朋也（探究学習コーディネーター）" loading="lazy"></div>
+        <h3>北田 朋也</h3>
+        <div class="sub">元教員・探究学習コーディネーター／Kyoto AI×Edu Lab（KAEL）代表</div>
+        <p>京都市の小学校教員を経て独立。京都を拠点に、学校・地域での探究学習プログラムの設計やファシリテーション、AI×教育の実践に取り組む。本イベントではプログラムの教育監修と当日の全体進行を担当。「遊び」で終わらせず、子どもの気づきと学びを引き出します。</p>
+        <div class="lvl">
+          <div class="row"><span>探究学習力</span><div class="bar"><i style="width:96%"></i></div></div>
+          <div class="row"><span>ファシリ力</span><div class="bar"><i style="width:94%"></i></div></div>
+        </div>
+        <div class="org-logo" style="margin:18px auto 0;">
+          <a href="https://vomoya.github.io/Kyoto_AI_Edu_Lab_HP/" target="_blank" rel="noopener"><img src="assets/kael_logo.png" alt="Kyoto AI×Edu Lab（KAEL）ロゴ" loading="lazy"></a>
+        </div>
+        <a class="x-link" href="https://vomoya.github.io/Kyoto_AI_Edu_Lab_HP/" target="_blank" rel="noopener">🌐 KAEL公式サイトを見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 保護者向け ================= -->
+<section class="sec-parent">
+  <div class="terrain terrain-top"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">FOR PARENTS</span>
+      <h2 class="sec-title">保護者のみなさまへ</h2>
+      <p class="sec-lead">安心してお子さまを送り出していただけるよう、運営体制を整えています。</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal d1">
+        <div class="icon">🏛️</div>
+        <h3>京都市教育委員会 後援</h3>
+        <p>本イベントは京都市教育委員会の後援名義使用許可を受けて実施する、非営利の教育イベントです。</p>
+      </div>
+      <div class="trust-card reveal d2">
+        <div class="icon">🛡️</div>
+        <h3>保険加入（開催者負担）</h3>
+        <p>損保ジャパンのレクリエーション損害保険ライトプランに開催者負担で加入し、万一に備えます。</p>
+      </div>
+      <div class="trust-card reveal d3">
+        <div class="icon">👨‍🏫</div>
+        <h3>元教員による教育監修</h3>
+        <p>元教員の探究学習コーディネーターが安全配慮とプログラム設計を監修。当日の全体進行も担当します。</p>
+      </div>
+      <div class="trust-card reveal d4">
+        <div class="icon">👪</div>
+        <h3>保護者同伴OK・参加無料</h3>
+        <p>保護者の方も会場で見守っていただけます（会場容量により小学生のお子さまの保護者を優先する場合があります）。</p>
+      </div>
+    </div>
+    <div class="parent-msg reveal">
+      <h3>「ゲームの時間」が、「考える時間」に変わります。</h3>
+      <p>マインクラフトに夢中になるお子さまの姿を見て、「遊んでばかりで大丈夫かな」と感じたことはありませんか。本ワークショップでは、その夢中の力を入口に、身のまわりの危険に気づき、理由を考え、対策をつくり、自分の言葉で発表する——探究学習のサイクルをまるごと体験します。</p>
+      <p>防災という「自分ごと」のテーマだからこそ、ゲームの中の学びが現実の暮らしにつながります。夏休みの一日、お子さまの「夢中」が「学び」に変わる瞬間を、ぜひ体験させてあげてください。</p>
+      <p class="name">マイクラ防災キャンプ2026 プログラム監修<br>北田 朋也<small>元教員・探究学習コーディネーター／Kyoto AI×Edu Lab（KAEL）</small></p>
+    </div>
+  </div>
+  <div class="terrain terrain-bottom"></div>
+</section>
+
+<!-- ================= 開催概要 ================= -->
+<section class="sec-outline">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** EVENT INFO ***</span>
+      <h2 class="sec-title">開催概要</h2>
+    </div>
+    <div class="inv reveal d1">
+      <div class="inv-title">■ マイクラ防災キャンプ2026</div>
+      <table>
+        <tr><th>日時</th><td><b>2026年8月8日（土）</b><br>第1部 10:00〜12:30 ／ 第2部 13:30〜16:00<span class="note">※開始15分前に集合してください</span></td></tr>
+        <tr><th>場所</th><td>京都経済センター3階 KOIN（京都市下京区・四条烏丸）</td></tr>
+        <tr><th>対象</th><td>小学4年生〜中学3年生（マイクラ未経験OK）</td></tr>
+        <tr><th>定員</th><td>各部 約25名（<b>先着順で締切</b>）</td></tr>
+        <tr><th>参加費</th><td><b>無料</b></td></tr>
+        <tr><th>持ち物</th><td><b>Minecraft統合版ダウンロード済みの端末</b>、筆記用具、充電器</td></tr>
+        <tr><th>申込</th><td><a href="https://forms.gle/EvSfuYTbUWDWj28R6" target="_blank" rel="noopener">申込フォーム（forms.gle/EvSfuYTbUWDWj28R6）</a></td></tr>
+        <tr><th>その他</th><td>保護者の方も同伴可能<span class="note">※会場容量によっては、小学生の方を優先させていただくことをご了承ください</span><span class="note">※当イベントでは、損保ジャパンのレクリエーション損害保険ライトプランに開催者負担で加入いたします</span></td></tr>
+        <tr><th>共催</th><td>京大マインクラフト同好会KUMC ／ Kyoto AI×Edu Lab（KAEL）</td></tr>
+        <tr><th>協力</th><td>飯田友広 -Netsujo株式会社-</td></tr>
+        <tr><th>後援</th><td>京都市教育委員会</td></tr>
+        <tr><th>問合せ</th><td><a href="mailto:kumcminecraft@gmail.com">kumcminecraft@gmail.com</a></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= アクセス ================= -->
+<section class="sec-access">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** SPAWN POINT ***</span>
+      <h2 class="sec-title">集合場所（スポーン地点）</h2>
+    </div>
+    <div class="access-card reveal d1">
+      <div class="place">京都経済センター 3階 KOIN</div>
+      <p>阪急「京都河原町方面 烏丸駅」・地下鉄「四条駅」すぐ。<br>四条烏丸交差点の南西角、LAQUE（ラクエ）向かいのビルです。</p>
+      <a class="mc-btn small" href="https://www.google.com/maps/search/%E4%BA%AC%E9%83%BD%E7%B5%8C%E6%B8%88%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener"><span class="glint"></span>地図を開く</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec-faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-en">*** HELP ***</span>
+      <h2 class="sec-title">よくあるご質問</h2>
+    </div>
+    <div class="faq-list reveal d1">
+      <details class="faq-item">
+        <summary><span class="q">？</span>マインクラフトをやったことがなくても参加できますか？</summary>
+        <div class="a">はい、大丈夫です。京大生スタッフが操作からやさしくサポートするので、初めてのお子さんも最後まで楽しく参加できます。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q">？</span>端末は何を持っていけばいいですか？</summary>
+        <div class="a">Minecraft「統合版（Bedrock Edition）」をダウンロード済みの端末（タブレット・PC・スマートフォン等）と充電器をお持ちください。あわせて筆記用具もご用意ください。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q">？</span>保護者は同伴できますか？</summary>
+        <div class="a">はい、同伴可能です。ただし会場容量によっては、小学生のお子さんの保護者の方を優先させていただく場合があります。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q">？</span>第1部と第2部の内容は違いますか？</summary>
+        <div class="a">内容は同じプログラムです。ご都合のよい部をお選びください（各部先着順・約25名）。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q">？</span>安全面の配慮はありますか？</summary>
+        <div class="a">元教員の探究学習コーディネーターが教育監修・安全配慮を担当し、当日は損保ジャパンのレクリエーション損害保険ライトプラン（開催者負担）に加入して実施します。京都市教育委員会の後援イベントです。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 最終CTA ================= -->
+<section class="sec-cta" id="apply">
+  <div class="wrap">
+    <div class="cta-hearts reveal">
+      <span>❤️</span><span>❤️</span><span>❤️</span><span>❤️</span><span>❤️</span>
+    </div>
+    <h2 class="cta-title reveal">この夏、いちばん熱い冒険が<br><span class="em">きみを待っている。</span></h2>
+    <div class="cta-deadline reveal d1">⚠ 定員 各部約25名｜先着順で締め切ります</div>
+    <div class="reveal d2">
+      <a class="mc-btn gold" href="https://forms.gle/EvSfuYTbUWDWj28R6" target="_blank" rel="noopener">
+        <span class="glint"></span>
+        ▶ 冒険に参加する（無料）<small>2026.8.8(土) 京都経済センターKOIN</small>
+      </a>
+      <div class="cta-url">forms.gle/EvSfuYTbUWDWj28R6</div>
+    </div>
+    <div class="reveal d3" style="text-align:center;margin-top:44px;">
+      <img src="assets/micra_tankyu_bg.png" alt="マイクラ×探究学習 — つくる。調べる。考える。未来をつくる力に。（KUMC × KAEL）" loading="lazy" style="max-width:640px;width:100%;margin:0 auto;border:3px solid #000;box-shadow:0 6px 0 rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.5);">
+    </div>
+    <div class="line-box reveal d3">
+      <div class="qr"><img src="assets/line_qr.png" alt="公式LINE「マイクラ×探究」友だち追加QRコード" loading="lazy"></div>
+      <div class="t">
+        <div class="head">📢 公式LINE「マイクラ×探究」</div>
+        <p>最新情報・お知らせを配信中！QRコードを読み取って友だち追加してください（KUMC × KAEL 共同運営）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= フッター ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-orgs">
+      <div class="org"><b>共催</b>京大マインクラフト同好会KUMC（<a href="https://x.com/KUMC_X" target="_blank" rel="noopener" style="color:#c6cbe8;">𝕏 @KUMC_X</a>）<br><a href="https://vomoya.github.io/Kyoto_AI_Edu_Lab_HP/" target="_blank" rel="noopener" style="color:#c6cbe8;">Kyoto AI×Edu Lab（KAEL）</a></div>
+      <div class="org"><b>協力</b>飯田友広 -Netsujo株式会社-</div>
+      <div class="org"><b>後援</b>京都市教育委員会</div>
+    </div>
+    <p class="footer-note">
+      ロゴに利用しているリソースおよび Minecraft Java Edition/Bedrock Edition は Mojang A.B. および Microsoft Japan/US Co. に帰するものです。また、当イベントはMinecraft公式のものではありません。MojangまたはMicrosoftから承認を受けたものではなく、非公式の有志による運営です。
+    </p>
+    <p style="text-align:center;">お問い合わせ：<a href="mailto:kumcminecraft@gmail.com" style="color:#c6cbe8;">kumcminecraft@gmail.com</a></p>
+    <p class="footer-copy">MINECRAFT BOSAI CAMP 2026 / KYOTO</p>
+  </div>
+</footer>
+
+<!-- ================= ホットバー ================= -->
+<div class="hotbar">
+  <div class="slot">⛏️</div>
+  <div class="slot">🧭</div>
+  <div class="slot info"><span><b>8.8(土)</b> KOIN</span><span>参加無料・先着順</span></div>
+  <a class="apply" href="https://forms.gle/EvSfuYTbUWDWj28R6" target="_blank" rel="noopener">▶ 申し込む</a>
+  <div class="slot">🛡️</div>
+  <div class="slot">💎</div>
+</div>
+
+<script>
+/* ===== 雨を生成（ヒーロー＆危険な世界） ===== */
+(function(){
+  document.querySelectorAll('.rain').forEach(function(r){
+    var n=parseInt(r.dataset.rain||'12',10);
+    for(var i=0;i<n;i++){
+      var d=document.createElement('i');
+      d.style.left=(Math.random()*100)+'%';
+      d.style.setProperty('--rd',(0.7+Math.random()*0.8)+'s');
+      d.style.animationDelay=(Math.random()*1.5)+'s';
+      r.appendChild(d);
+    }
+  });
+})();
+
+/* ===== スクロール出現 ===== */
+(function(){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+
+/* ===== XPバー＆レベル＆実績 ===== */
+(function(){
+  var fill=document.getElementById('xpfill');
+  var lv=document.getElementById('xplv');
+  var toast=document.getElementById('toast');
+  var toastShown=false;
+  function upd(){
+    var h=document.documentElement;
+    var p=h.scrollTop/(h.scrollHeight-h.clientHeight);
+    p=Math.max(0,Math.min(1,p));
+    fill.style.width=(p*100)+'%';
+    lv.textContent='LV.'+Math.floor(p*30);
+    if(p>0.92&&!toastShown){
+      toastShown=true;
+      toast.classList.add('show');
+      setTimeout(function(){toast.classList.remove('show');},4200);
+    }
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  upd();
+})();
+
+/* ===== クリックでブロック破壊パーティクル ===== */
+(function(){
+  var colors=['#6fc349','#79553a','#8a8a8a','#ffcf4d','#5ce8e0'];
+  document.addEventListener('click',function(e){
+    if(e.target.closest('a,button,summary,input,textarea'))return;
+    for(var i=0;i<10;i++){
+      var p=document.createElement('div');
+      p.className='burst';
+      p.style.background=colors[Math.floor(Math.random()*colors.length)];
+      p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';
+      document.body.appendChild(p);
+      (function(el){
+        var ang=Math.random()*Math.PI*2;
+        var v=3+Math.random()*5;
+        var vx=Math.cos(ang)*v, vy=Math.sin(ang)*v-4;
+        var x=0,y=0,life=0;
+        var t=setInterval(function(){
+          life++;vy+=0.6;x+=vx;y+=vy;
+          el.style.transform='translate('+x+'px,'+y+'px)';
+          el.style.opacity=1-life/24;
+          if(life>24){clearInterval(t);el.remove();}
+        },16);
+      })(p);
+    }
+  });
+})();
+</script>
+</body>
+</html>
