@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マイクラ防災キャンプ2026 当日運営マニュアル（スタッフ共有用）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#131320; --panel:#1d1d30; --panel2:#252540;
+    --grass:#7ec850; --grass-d:#4e8a2e; --gold:#f0c419; --diamond:#4fd1c5;
+    --red:#e06c5c; --text:#f2f2ea; --sub:#b8b8c8; --line:#3a3a58;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#000;font-family:'M PLUS Rounded 1c',sans-serif;color:var(--text)}
+  .slide{
+    width:1280px;height:720px;background:var(--bg);position:relative;overflow:hidden;
+    padding:52px 64px 60px;display:none;flex-direction:column;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:32px 32px;
+  }
+  .slide.active{display:flex}
+  .slide::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;
+    background:repeating-linear-gradient(90deg,var(--grass) 0 32px,var(--grass-d) 32px 64px)}
+  .tag{font-family:'DotGothic16',monospace;font-size:17px;color:var(--gold);letter-spacing:2px;margin-bottom:10px}
+  h1{font-family:'DotGothic16',monospace;font-size:52px;line-height:1.25;color:#fff}
+  h2{font-family:'DotGothic16',monospace;font-size:34px;color:#fff;margin-bottom:22px;
+    padding-left:16px;border-left:12px solid var(--grass);line-height:1.3}
+  h2 .em{color:var(--gold)}
+  .pagenum{position:absolute;right:28px;bottom:26px;font-family:'DotGothic16',monospace;font-size:14px;color:var(--sub)}
+  .content{flex:1;display:flex;flex-direction:column;min-height:0}
+  p.lead{font-size:21px;line-height:1.7;color:var(--text)}
+  .cols{display:flex;gap:22px;flex:1;min-height:0}
+  .col{flex:1;min-width:0}
+  .box{background:var(--panel);border:2px solid var(--line);border-radius:6px;padding:16px 18px;margin-bottom:12px}
+  .box.accent{border-color:var(--grass)}
+  .box.warn{border-color:var(--red)}
+  .box.gold{border-color:var(--gold)}
+  .box h3{font-size:20px;color:var(--grass);margin-bottom:8px;font-weight:800}
+  .box.warn h3{color:var(--red)}
+  .box.gold h3{color:var(--gold)}
+  .box p,.box li{font-size:17px;line-height:1.6;color:var(--text)}
+  ul.list{list-style:none}
+  ul.list li{padding-left:22px;position:relative;margin-bottom:8px;font-size:18px;line-height:1.55}
+  ul.list li::before{content:"■";position:absolute;left:0;color:var(--grass);font-size:13px;top:5px}
+  ul.list li.g::before{color:var(--gold)}
+  ul.list li.r::before{color:var(--red)}
+  table{width:100%;border-collapse:collapse;font-size:16.5px}
+  th{background:var(--panel2);color:var(--gold);font-weight:800;padding:8px 10px;border:1px solid var(--line);text-align:left}
+  td{padding:7px 10px;border:1px solid var(--line);line-height:1.45;vertical-align:top}
+  tr.hl td{background:rgba(126,200,80,.13)}
+  .big{font-size:22px;font-weight:800;color:var(--gold)}
+  .kv{display:flex;gap:14px;flex-wrap:wrap}
+  .chip{background:var(--panel2);border:2px solid var(--line);border-radius:6px;padding:10px 16px;font-size:17px}
+  .chip b{color:var(--diamond)}
+  .flow{display:flex;align-items:stretch;gap:8px;margin:10px 0}
+  .flow .step{flex:1;background:var(--panel2);border:2px solid var(--grass);border-radius:6px;
+    padding:10px 8px;text-align:center;font-size:15.5px;line-height:1.4;display:flex;flex-direction:column;justify-content:center}
+  .flow .arrow{align-self:center;color:var(--gold);font-size:20px;font-family:'DotGothic16',monospace}
+  .ok{color:var(--grass);font-weight:800}
+  .ng{color:var(--red);font-weight:800}
+  .gld{color:var(--gold);font-weight:800}
+  .dia{color:var(--diamond);font-weight:800}
+  .note{font-size:15px;color:var(--sub);margin-top:auto;padding-top:10px}
+  /* title slide */
+  .title-slide{justify-content:center;align-items:flex-start}
+  .title-slide .date{font-family:'DotGothic16',monospace;font-size:24px;color:var(--diamond);margin:26px 0 12px}
+  .title-slide .sub{font-size:22px;color:var(--sub);line-height:1.8}
+  .pixel-row{display:flex;gap:6px;margin-bottom:30px}
+  .px{width:22px;height:22px}
+  /* nav help */
+  #help{position:fixed;left:12px;bottom:12px;font-family:'DotGothic16',monospace;font-size:12px;color:#888;z-index:99}
+  @media screen{
+    body{display:flex;justify-content:center;align-items:center;min-height:100vh}
+    .deck{transform-origin:center center}
+  }
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    body{background:var(--bg)}
+    .slide{display:flex !important;page-break-after:always}
+    #help{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1. タイトル -->
+<section class="slide title-slide active">
+  <div class="pixel-row">
+    <div class="px" style="background:#7ec850"></div><div class="px" style="background:#4e8a2e"></div>
+    <div class="px" style="background:#f0c419"></div><div class="px" style="background:#4fd1c5"></div>
+    <div class="px" style="background:#e06c5c"></div><div class="px" style="background:#7ec850"></div>
+  </div>
+  <div class="tag">STAFF MANUAL</div>
+  <h1>マイクラ防災キャンプ2026<br>当日運営マニュアル</h1>
+  <div class="date">2026.8.8 SAT ｜ 京都経済センター 3F KOIN</div>
+  <p class="sub">KUMC × KAEL 共同主催 ｜ スタッフ共有用<br>
+  子どもと関わるのが不安な人は、後半の「関わり方マニュアル」だけでも読めばOK！</p>
+  <div class="pagenum">1</div>
+</section>
+
+<!-- 2. 基本情報とゴール -->
+<section class="slide">
+  <h2>イベント基本情報 と <span class="em">今日のゴール</span></h2>
+  <div class="content">
+    <div class="kv" style="margin-bottom:18px">
+      <div class="chip"><b>日時</b>　8/8(土) 第1部 10:00–12:30 ／ 第2部 13:30–16:00</div>
+      <div class="chip"><b>会場</b>　京都経済センター 3F KOIN</div>
+      <div class="chip"><b>対象</b>　小4〜中3・各部25名（未経験可）</div>
+      <div class="chip"><b>集合</b>　スタッフ 8:30</div>
+      <div class="chip"><b>後援</b>　京都市教育委員会</div>
+    </div>
+    <div class="box accent">
+      <h3>全スタッフ共通のゴール</h3>
+      <p style="font-size:20px">マイクラは<span class="gld">「きっかけ」</span>。子どもが危険に<b>気づき・考え・つくって・伝える</b>体験をして、<br>
+      帰り道や家で「ここも危ないかも」と探すようになったら<span class="ok">大成功</span>。</p>
+      <p style="margin-top:8px;color:var(--sub)">立派な作品を完成させることがゴールではありません。</p>
+    </div>
+    <div class="box">
+      <h3>学びの5ステップ（声かけはぜんぶこの言葉でOK）</h3>
+      <div class="flow">
+        <div class="step">① 気づく</div><div class="arrow">▶</div>
+        <div class="step">② 考える</div><div class="arrow">▶</div>
+        <div class="step">③ 改善する</div><div class="arrow">▶</div>
+        <div class="step">④ つくる</div><div class="arrow">▶</div>
+        <div class="step">⑤ 伝える</div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">2</div>
+</section>
+
+<!-- 3. スタッフの1日 -->
+<section class="slide">
+  <h2>スタッフの1日 <span class="em">全体タイムライン</span></h2>
+  <div class="content">
+    <table>
+      <tr><th style="width:150px">時刻</th><th>内容</th><th>ポイント</th></tr>
+      <tr class="hl"><td><b>8:30</b></td><td>スタッフ集合・ブリーフィング</td><td>役割最終確認・本マニュアル要点共有</td></tr>
+      <tr><td>8:40–9:20</td><td>会場設営</td><td>机椅子／配線／サーバー起動／投影テスト／受付設営</td></tr>
+      <tr><td>9:20–9:30</td><td>最終チェック</td><td>全端末ログイン・入室テスト・配布物/名札素材配置</td></tr>
+      <tr class="hl"><td><b>9:30</b></td><td>第1部 受付開始（30分前）</td><td>名簿→座席案内→来た子から名札づくり・接続確認へ</td></tr>
+      <tr><td>10:00–12:30</td><td><b>第1部 本編</b></td><td>150分プログラム（次スライド）</td></tr>
+      <tr><td>12:30–13:00</td><td>見送り・アンケート回収／<b>ワールドリセット</b></td><td>リセットは技術班最優先。空いた人から交代で昼食</td></tr>
+      <tr class="hl"><td><b>13:00</b></td><td>第2部 受付開始（30分前）</td><td>最低限人員で受付、残りは13:30までに昼食を済ませる</td></tr>
+      <tr><td>13:30–16:00</td><td><b>第2部 本編</b></td><td>第1部と同じ流れ</td></tr>
+      <tr><td>16:00–16:20</td><td>見送り・アンケート回収</td><td>回収率が成果報告の生命線</td></tr>
+      <tr><td>16:20–17:00</td><td>撤収・原状復帰</td><td>忘れ物確認・会場チェック</td></tr>
+      <tr><td>17:00頃</td><td>ふりかえり10分→解散</td><td>NF・学び育みマルシェへの申し送り</td></tr>
+    </table>
+  </div>
+  <div class="pagenum">3</div>
+</section>
+
+<!-- 4. 本編150分早見表 -->
+<section class="slide">
+  <h2>本編150分 <span class="em">早見表</span>（第1部／第2部共通）</h2>
+  <div class="content">
+    <table style="font-size:17.5px">
+      <tr><th>第1部</th><th>第2部</th><th>プログラム</th><th>進行</th></tr>
+      <tr><td>10:00–10:20</td><td>13:30–13:50</td><td><b>事前準備</b>（名札・接続・入室・雑談）</td><td>KUMC技術班</td></tr>
+      <tr><td>10:20–10:35</td><td>13:50–14:05</td><td><b>アイスブレイク</b>（京都災害写真クイズ）</td><td>北田</td></tr>
+      <tr><td>10:35–10:45</td><td>14:05–14:15</td><td><b>防災レクチャー</b></td><td>北田</td></tr>
+      <tr><td>10:45–11:15</td><td>14:15–14:45</td><td><b>課題発見</b>（冒頭:2ワールド紹介＋洪水体験→チーム別）</td><td>KUMC→全スタッフ</td></tr>
+      <tr><td>11:15–11:25</td><td>14:45–14:55</td><td><b>休憩</b>（マイクラ触っててOK）</td><td>-</td></tr>
+      <tr><td>11:25–12:05</td><td>14:55–15:35</td><td><b>個人制作</b>（ラスト10分は見せ合い）</td><td>全スタッフ</td></tr>
+      <tr><td>12:05–12:20</td><td>15:35–15:50</td><td><b>グループ発表</b>（前方投影）</td><td>北田＋各担当</td></tr>
+      <tr><td>12:20–12:30</td><td>15:50–16:00</td><td><b>まとめ・ふりかえり記入・終了案内</b></td><td>北田</td></tr>
+    </table>
+    <div class="note">⏱ 前方スライドにタイマー内蔵（北田操作）。<b>巻き・押しの判断はすべて北田が出す</b> → スタッフは自分のテーブルに集中。</div>
+  </div>
+  <div class="pagenum">4</div>
+</section>
+
+<!-- 5. 事前準備 -->
+<section class="slide">
+  <h2>(1) 事前準備 20分 <span class="em">最初の山場！</span></h2>
+  <div class="content">
+    <div class="flow" style="margin-bottom:16px">
+      <div class="step">受付<br>(名簿チェック)</div><div class="arrow">▶</div>
+      <div class="step">座席案内</div><div class="arrow">▶</div>
+      <div class="step">① 名札づくり</div><div class="arrow">▶</div>
+      <div class="step">② Wi-Fi接続<br>ワールド接続確認</div><div class="arrow">▶</div>
+      <div class="step">③ ロビーで待機<br>(京大キャンパスW散策)</div><div class="arrow">▶</div>
+      <div class="step">④ 雑談</div>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <div class="box"><h3>ポイント</h3>
+          <ul class="list">
+            <li>名札は<b>子ども自身が作る</b>（呼ばれたい名前）</li>
+            <li>接続できた子から<b>ロビーへテレポート</b>。ロビー＝KUMC制作の<span class="dia">京大キャンパスワールド</span>を散策して操作に慣れる</li>
+            <li>雑談：「マイクラ歴は？」「今日何作りたい？」<br><span class="gld">→ここで名前を覚えると後半が全部楽になる</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box warn"><h3>トラブット対応ルール</h3>
+          <ul class="list">
+            <li class="r">接続トラブルは<b>5分で技術統括へ</b>（抱え込まない）</li>
+            <li class="r">解消不能なら<b>「集めて1台」体制</b>へ切替（後述）</li>
+            <li>10:00になったら未完了の子がいても開会。受付担当・技術班が並行対応</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">5</div>
+</section>
+
+<!-- 6. アイスブレイク・レクチャー -->
+<section class="slide">
+  <h2>(2) アイスブレイク 15分 ／ (3) レクチャー 10分</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="box accent"><h3>アイスブレイク＝京都災害写真クイズ（北田進行）</h3>
+          <p>「この写真どこだと思う？」「いつもの嵐山とどこが違う？」<br>→ 挙手・つぶやきを拾いながらテンポよく全体対話。</p>
+        </div>
+        <div class="box gold"><h3>スタッフ＝テーブルの反応係</h3>
+          <ul class="list">
+            <li>子どもと同じ目線で「えー！」と一緒に驚く</li>
+            <li class="g">ボソッと良いこと言った子がいたら<br><b>「〇〇さんがいいこと言ってます！」と全体に橋渡し</b><br>→ これが一番のファインプレー</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box"><h3>防災レクチャー（北田スライド）</h3>
+          <ul class="list">
+            <li>防災ってなに？／ミッション5ステップ／約束</li>
+            <li>前方注目の時間。触り出す子には小声で<br>「一旦手を離して前見てみよう」</li>
+          </ul>
+        </div>
+        <div class="box"><h3>今回の課題ワールドは2つ</h3>
+          <p style="font-family:'DotGothic16',monospace;font-size:22px;line-height:1.9;text-align:center">
+          🌊 洪水ワールド ／ 🏚 地震ワールド</p>
+          <p style="color:var(--sub);font-size:15px">紹介はレクチャー後にKUMC技術班が実施（次スライド）</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">6</div>
+</section>
+
+<!-- 7. 課題発見 -->
+<section class="slide">
+  <h2>(4) 課題発見 30分 <span class="em">冒頭10分はKUMC技術班の進行</span></h2>
+  <div class="content">
+    <div class="flow" style="margin-bottom:12px">
+      <div class="step">① 2ワールド紹介<br>(前方モニター・技術班)</div><div class="arrow">▶</div>
+      <div class="step">② 洪水体験<br>全員テレポ・約5分探索</div><div class="arrow">▶</div>
+      <div class="step">③ 全員ロビーへ転送</div><div class="arrow">▶</div>
+      <div class="step">④ チーム別ワールドへ<br>発見パート開始</div>
+    </div>
+    <p class="lead" style="font-size:17px;margin-bottom:10px">②は「洪水が起こると何が起きるか」を再現ワールドで歩いて体感（スタッフも一緒に驚く役）。<br>④以降は探索⇄記入が<span class="gld">行き来自由・個人ペース</span>（実質15〜20分）＝<b>スタッフの巡回声かけが進行そのもの</b>。<span class="ng">クラフトはまだ制限中。</span></p>
+    <table style="font-size:15.5px">
+      <tr><th style="width:250px">子どもの状態</th><th>声かけ</th></tr>
+      <tr><td>探索中</td><td>「何か見つけた？」「なんでそれ危ないと思った？」</td></tr>
+      <tr><td>危険を言葉にできた</td><td>「今の言葉、ワークシートに書いておこう」（記入への橋渡し）</td></tr>
+      <tr><td>書かずに遊んでいる</td><td>責めずに「見つけたやつ1個だけ描いておこ。<b>絵でいいよ</b>」</td></tr>
+      <tr><td>終盤5分</td><td>「対策のアイデアある？」→ 制作タイムへの種まき</td></tr>
+    </table>
+  </div>
+  <div class="pagenum">7</div>
+</section>
+
+<!-- 8. 休憩・制作 -->
+<section class="slide">
+  <h2>(5) 休憩 10分 ／ (6) 個人制作 40分</h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col" style="flex:0.8">
+        <div class="box"><h3>休憩の運用</h3>
+          <ul class="list">
+            <li>マイクラ<b>触っててOK</b>（自由）。発見ワールドの探索継続もOK</li>
+            <li class="r"><b>トイレ・水分の声かけは全員に必ず</b>（低学年はトイレまで案内）</li>
+            <li>スタッフも交代で水分補給。後半戦が本番</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col" style="flex:1.4">
+        <div class="box accent"><h3>制作開始＝クラフト機能の解除（技術班）</h3>
+          <p>「ここからは作れるよ！」が制作パートの合図。<b>前半〜30分は制作に集中</b>。<b>手が止まっている子を最優先</b>でサポート（原因3タイプは後述）。</p>
+        </div>
+        <div class="box gold"><h3>残り10分：チーム内見せ合いタイム（北田アナウンス）</h3>
+          <ul class="list">
+            <li class="g">テーブル担当が進行役「〇〇さんから画面見せて一言どうぞ」</li>
+            <li class="g"><b>発表方法（代表 or 1人ずつ）をここでグループと決めておく</b></li>
+            <li>迷う子には型を渡す：「BEFOREとAFTERを見せて<br>『ここが危なかったから、こうした』でOK」</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">8</div>
+</section>
+
+<!-- 9. 発表 -->
+<section class="slide">
+  <h2>(7) グループ発表 15分 <span class="em">前方スクリーンに投影</span></h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="box accent"><h3>発表のかたち</h3>
+          <ul class="list">
+            <li>各グループ順番に、前方投影しながら「どんな防災対策をしたか」発表</li>
+            <li><b>代表1名 or 1人ずつはグループが選ぶ</b>（見せ合いタイムで決定済）</li>
+            <li>目安 <b>1グループ約2分半</b>（5〜6グループ）。超過は北田がコントロール</li>
+          </ul>
+        </div>
+        <div class="box"><h3>投影・画面まわり（KUMC技術班）</h3>
+          <ul class="list">
+            <li><b>管理用PC</b>で該当ワールドに移動して投影（子どものPCつなぎ替え不要）</li>
+            <li class="r">発表開始時に<b>全員をロビーへテレポート送還</b>→手元から作業を切り離し前方注目</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box gold"><h3>テーブル担当＝インタビュー役ができる</h3>
+          <p>「これは何？」「どこを一番工夫した？」と聞いてあげれば、<br>発表が苦手な子も<b>答えるだけで発表になる</b>。</p>
+        </div>
+        <div class="box"><h3>聞く側のスタッフ＝一番のリアクション役</h3>
+          <ul class="list">
+            <li>うなずく・「おお！」・拍手</li>
+            <li>発表後は「〇〇に<b>気づいたのがすごい</b>」と<br>気づき・考えをほめる一言を</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">9</div>
+</section>
+
+<!-- 10. まとめ -->
+<section class="slide">
+  <h2>(8) まとめ・ふりかえり・終了案内 10分</h2>
+  <div class="content">
+    <div class="flow" style="margin-bottom:18px">
+      <div class="step">① 北田まとめトーク<br>「家・通学路で探すのが本当の防災」</div><div class="arrow">▶</div>
+      <div class="step">② ふりかえり欄 記入<br><b>3分とる</b></div><div class="arrow">▶</div>
+      <div class="step">③ 次回案内・公式LINE<br>（マルシェ／NF）</div><div class="arrow">▶</div>
+      <div class="step">④ 出口でアンケート回収<br>見送り</div>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <div class="box"><h3>ふりかえり記入（3分）</h3>
+          <p>ワークシート下段「家・通学路・学校で同じ危険を探そう」をその場で記入。<br>スタッフは巡回して「家のどこが気になる？」と一言添える。</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box gold"><h3>見送りの一言</h3>
+          <p>「今日の作品のこと、おうちの人に話してあげてね」<br>＋LINE登録の最後の一押し「続きのイベント案内が届くよ」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">10</div>
+</section>
+
+<!-- 11. 役割分担 -->
+<section class="slide">
+  <h2>当日の役割分担</h2>
+  <div class="content">
+    <table style="font-size:17.5px">
+      <tr><th style="width:220px">役割</th><th style="width:150px">人数</th><th>主な仕事</th></tr>
+      <tr><td><b>メインファシリ</b></td><td>北田</td><td>全体進行・レクチャー・時間管理・<b>保護者対応・最終判断</b></td></tr>
+      <tr><td><b>技術統括</b></td><td>KUMC 1名</td><td>サーバー監視・リセット・技術トラブル一次判断</td></tr>
+      <tr><td><b>受付・誘導</b></td><td>KUMC 1名</td><td>受付・座席案内・遅刻対応・アンケート回収（受付後はテーブルへ合流）</td></tr>
+      <tr class="hl"><td><b>テーブルサポート</b></td><td>KUMC 3〜4名</td><td><b>各テーブル担当制</b>。子どもの伴走・操作サポート・声かけ（→関わり方マニュアル）</td></tr>
+      <tr><td><b>機材トラブル班</b></td><td>兼任1名</td><td>トラブル発生時「集めて1台」体制の専任に切替</td></tr>
+    </table>
+    <div class="box warn" style="margin-top:16px"><h3>「集めて1台」体制（6/7 MTG合意）</h3>
+      <p>機材トラブルが解消しない子が出たら → <b>足りないと分かった時点で全員前に集める</b> → スタッフ1名がつき1台のPCでワイワイ作る。<br>
+      <span class="ng">紙のワークシートだけで完結はNG。</span>「マイクラを一緒に作れた」体験で帰す。</p>
+    </div>
+  </div>
+  <div class="pagenum">11</div>
+</section>
+
+<!-- 12. 技術班タイムライン -->
+<section class="slide">
+  <h2>KUMC技術班 <span class="em">いつ・何が必要か</span></h2>
+  <div class="content">
+    <table style="font-size:14.5px">
+      <tr><th style="width:185px">タイミング</th><th style="width:185px">第1部／第2部</th><th>必要なこと</th></tr>
+      <tr><td>前日まで</td><td>-</td><td>2ワールド（洪水・地震）／ロビー（京大キャンパスW）／洪水体験Wの整備・一斉テレポ／クラフトON-OFF／リセット手順テスト</td></tr>
+      <tr><td>設営〜チェック</td><td>8:40–9:30</td><td>サーバー起動・投影テスト・全端末ログイン/入室テスト</td></tr>
+      <tr class="hl"><td>受付〜事前準備</td><td>9:30–10:20 / 13:00–13:50</td><td>来た子から<b>Wi-Fi→ワールド接続確認→ロビーへテレポ</b>。<b>接続トラブル対応の本番</b>（5分超案件の引き取り・「集めて1台」切替判断）</td></tr>
+      <tr class="hl"><td><b>課題発見の冒頭（進行パート）</b></td><td>10:45–10:55頃 / 14:15–14:25頃</td><td><b>①前方モニターで2ワールド紹介 → ②洪水体験Wへ全員テレポ（5分） → ③全員ロビーへ → ④チーム別ワールドへ転送</b></td></tr>
+      <tr><td>発見〜休憩</td><td>10:55–11:25 / 14:25–14:55</td><td>サーバー監視。クラフトは制限のまま（休憩中の探索はOK）</td></tr>
+      <tr class="hl"><td><b>制作パート開始</b></td><td>11:25 / 14:55</td><td><b>全員のクラフト機能を解除</b></td></tr>
+      <tr class="hl"><td><b>グループ発表</b></td><td>12:05–12:20 / 15:35–15:50</td><td><b>全員ロビー送還（交流中は触らせない）→ 管理用PCで該当エリア投影 → グループごと切替</b></td></tr>
+      <tr class="hl"><td>部の入れ替え</td><td>12:30–13:00</td><td><b>ワールドリセット最優先</b>。完了確認まで昼食に入らない</td></tr>
+      <tr><td>終了後</td><td>16:00–</td><td>サーバー停止・機材撤収</td></tr>
+    </table>
+    <div class="note">※具体的な作業手順（コマンド・設定等）はKUMC技術班内で別途共有。</div>
+  </div>
+  <div class="pagenum">12</div>
+</section>
+
+<!-- 13. 関わり方：安心 -->
+<section class="slide">
+  <h2>関わり方マニュアル <span class="em">まず安心してほしいこと</span></h2>
+  <div class="content">
+    <div class="box accent" style="padding:22px">
+      <ul class="list" style="font-size:21px">
+        <li style="margin-bottom:16px">参加者は<b>マイクラが好きで自分から来る子どもたち</b>。<br>関係づくりの半分はもう終わっている。</li>
+        <li style="margin-bottom:16px">みなさんは子どもから見ると<span class="gld">「マイクラがめちゃくちゃ上手い京大のお兄さん・お姉さん」</span>。<br>それだけで憧れの存在。上手に話す必要はない。</li>
+        <li>難しい対応（泣く・けんか・保護者・体調不良）は<b>全部北田に投げてOK</b>。<br>みなさんの仕事は<span class="dia">「隣で一緒に楽しむこと」</span>。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pagenum">13</div>
+</section>
+
+<!-- 14. 3原則 -->
+<section class="slide">
+  <h2>関わり方の<span class="em">3原則</span></h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="box accent" style="height:92%"><h3>原則1<br>教えない、問いかける</h3>
+          <p>答えを教えると考える機会を奪う。<br>答えを言いたくなったら、<b>代わりに質問</b>する。</p>
+          <p style="margin-top:12px"><span class="ng">✗</span>「ここに防波堤を作ればいいよ」<br>
+          <span class="ok">◎</span>「水はどっちから来そう？」</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box gold" style="height:92%"><h3>原則2<br>作品でなく行動をほめる</h3>
+          <p>ほめるのは<b>気づいた・考えた・工夫した・説明した</b>というプロセス。</p>
+          <p style="margin-top:12px">「その危険、よく見つけたね！」<br>「やり方変えて続けてるのすごいね」</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box warn" style="height:92%"><h3>原則3<br>腕前で子どもを比べない</h3>
+          <p>「〇〇くんは上手だね」は、隣の子への<span class="ng">「君は下手だね」</span>に聞こえる。</p>
+          <p style="margin-top:12px">習熟度はバラバラで当然。<br><b>他の子と比べる言葉は使わない</b>。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">14</div>
+</section>
+
+<!-- 15. 言い換え表 -->
+<section class="slide">
+  <h2>言いがちワード <span class="em">言い換え表</span></h2>
+  <div class="content">
+    <table style="font-size:20px">
+      <tr><th>❌ 言いがち</th><th>⭕ 代わりにこう言う</th></tr>
+      <tr><td>「ここに防波堤を作ればいいよ」</td><td>「水はどっちから来そう？」</td></tr>
+      <tr><td>「それじゃ火事は防げないよ」</td><td>「もしここで火が出たら、どうなると思う？」</td></tr>
+      <tr><td>「正解はこれ」</td><td>「〇〇さんはどう考えた？ 理由も聞きたい！」</td></tr>
+      <tr><td>「〇〇くんは上手だね」（比較）</td><td>「なんでそこに作ろうと思ったの？…理由があるんだ！」</td></tr>
+      <tr><td>「早くして」「違う」</td><td>「どこで困ってる？」「一番大事な対策はどれ？」</td></tr>
+    </table>
+    <div class="box" style="margin-top:16px"><h3>立ち居振る舞いの基本</h3>
+      <p>呼び方は名札の<b>「〇〇さん」</b>／話すときは<b>しゃがんで目の高さ</b>／ボディタッチ原則なし・<b>マウスを奪わない</b>／
+      個人スマホで撮影しない／子どもの個人情報をSNSに書かない</p>
+    </div>
+  </div>
+  <div class="pagenum">15</div>
+</section>
+
+<!-- 16. 手が止まる3タイプ -->
+<section class="slide">
+  <h2>制作中、手が止まる子の<span class="em">3タイプ</span></h2>
+  <div class="content">
+    <table style="font-size:18px">
+      <tr><th style="width:230px">原因</th><th style="width:290px">サイン</th><th>対応</th></tr>
+      <tr><td><b>操作がわからない</b></td><td>画面をじっと見ている・キョロキョロ</td><td>「どこで困ってる？」→<b>操作だけははっきり教えてOK</b>（操作は探究の対象ではない）</td></tr>
+      <tr><td><b>アイデアが出ない</b></td><td>ブロックを置いては壊す</td><td>「さっき見つけた危険、どうなったら安心？」と<b>BEFOREに立ち返る</b></td></tr>
+      <tr><td><b>飽きた・脱線</b></td><td>巨大な家・TNT etc.</td><td>頭ごなしに止めず「お、すごいね。ところで<b>これ、災害が来たらどうなる？</b>」と課題に接続し直す</td></tr>
+    </table>
+    <div class="box gold" style="margin-top:16px"><h3>完成度が低くても大丈夫</h3>
+      <p>発表で<b>「何を考えたか」を話せれば学びとして成立</b>。<br>「間に合わない！」と焦る子には →「全部作れなくていいよ。<b>一番大事な対策はどれ？</b>」</p>
+    </div>
+  </div>
+  <div class="pagenum">16</div>
+</section>
+
+<!-- 17. 困った場面Q&A -->
+<section class="slide">
+  <h2>困った場面 <span class="em">Q&A</span></h2>
+  <div class="content">
+    <table style="font-size:16.5px">
+      <tr><th style="width:290px">場面</th><th>対応</th></tr>
+      <tr><td>他の子にちょっかい・邪魔</td><td>「自分のエリアの一番かっこいい対策見せて」と<b>本人の活動に引き戻す</b>。繰り返す→北田へ</td></tr>
+      <tr><td>けんか・強い言い合い</td><td>仲裁を頑張らない。<b>間に入って離し、すぐ北田を呼ぶ</b></td></tr>
+      <tr><td>泣いてしまった</td><td>隣に座って「どうしたの」だけでOK。無理に聞き出さない。長引く→北田へ</td></tr>
+      <tr><td>「つまらない」「この課題やだ」</td><td>「一番むずかしいところ教えて」と<b>攻略対象化</b>。乗らなければ北田へ</td></tr>
+      <tr><td>体調不良</td><td>すぐ止めて涼しい場所へ。<b>必ず北田に報告</b>（保護者連絡は北田判断）</td></tr>
+      <tr><td>トイレ</td><td>行かせてOK。低学年は案内。<b>会場外に1人で出さない</b></td></tr>
+      <tr class="hl"><td><b>保護者から話しかけられた</b></td><td>挨拶＋「楽しんでますよ」まで。<b>要望・クレームは「主催の北田にお繋ぎします」</b>。その場で約束しない</td></tr>
+      <tr class="hl"><td><b>地震・火災など本物の緊急時</b></td><td>北田の指示で行動。担当テーブルの<b>人数把握と誘導</b>が最優先。荷物より人</td></tr>
+    </table>
+  </div>
+  <div class="pagenum">17</div>
+</section>
+
+<!-- 18. 最終ルール -->
+<section class="slide">
+  <h2>迷ったときの<span class="em">最終ルール</span></h2>
+  <div class="content" style="justify-content:center">
+    <div class="box accent" style="padding:30px;text-align:center">
+      <p style="font-family:'DotGothic16',monospace;font-size:30px;line-height:2">
+        迷ったら → 子どもの<span class="gld">「楽しい」</span>と<span class="dia">「安全」</span>を優先<br>
+        判断できなかったら → <span class="ok">北田を呼ぶ</span>
+      </p>
+      <p style="font-size:20px;color:var(--sub);margin-top:14px">呼ぶことは失敗ではなく<b>正しい対応</b>。呼ばずに抱え込む方がリスク。</p>
+    </div>
+    <div class="kv" style="margin-top:20px;justify-content:center">
+      <div class="chip">全体指示：<b>北田</b></div>
+      <div class="chip">技術判断：<b>KUMC技術統括</b></div>
+      <div class="chip">緊急連絡先・救急セット：<b>受付に常置</b></div>
+      <div class="chip">スタッフ連絡手段：<b>朝ブリーフィングで確定</b></div>
+    </div>
+  </div>
+  <div class="pagenum">18</div>
+</section>
+
+<!-- 19. 終了後 -->
+<section class="slide">
+  <h2>終了後にやること ＆ <span class="em">今日をどう終えるか</span></h2>
+  <div class="content">
+    <div class="cols">
+      <div class="col">
+        <div class="box"><h3>チェックリスト</h3>
+          <ul class="list">
+            <li>アンケート出口回収（子ども＝紙・回収箱）<span class="gld">←成果報告の生命線</span></li>
+            <li>保護者・参観者アンケートはQR掲示（受付・出口）</li>
+            <li>公式LINE登録の最後の一押し</li>
+            <li>忘れ物チェック（受付集約→北田から保護者連絡）</li>
+            <li>第1部後：<b>ワールドリセット</b>（技術班最優先）</li>
+            <li>撤収・原状復帰 → ふりかえり10分（NF・マルシェへ申し送り）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="box gold"><h3>最後にもう一度</h3>
+          <p style="font-size:19px;line-height:1.8">今日のゴールは、子どもが帰り道に<br>
+          <span class="gld">「ここも危ないかも」</span>と探し始めること。<br><br>
+          そのために私たちがやるのは、<br><b>教えることではなく、隣で一緒に楽しむこと。</b><br><br>
+          <span class="dia">きみのまちを、きみが守れ。</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">19</div>
+</section>
+
+</div>
+<div id="help">←→ スライド送り ｜ F 全画面 ｜ <a href="staff-manual.pdf" style="color:#f0c419">📄 PDF版（印刷用）</a></div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];let cur=0;
+  function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,n)=>s.classList.toggle('active',n===cur));}
+  function fit(){const d=document.getElementById('deck');const s=Math.min(innerWidth/1280,innerHeight/720);d.style.transform=`scale(${s})`;}
+  addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')show(cur+1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp')show(cur-1);
+    if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+    if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);
+  });
+  addEventListener('click',e=>{if(e.clientX>innerWidth/2)show(cur+1);else show(cur-1);});
+  addEventListener('resize',fit);fit();show(0);
+</script>
+</body>
+</html>
