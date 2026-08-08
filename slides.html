@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マイクラ防災キャンプ2026｜当日提示スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0b1026;
+  --night2:#141a3a;
+  --dusk:#2a2350;
+  --grass:#6fc349;
+  --grass-hi:#8ee06a;
+  --dirt:#79553a;
+  --dirt-dark:#5c3f2a;
+  --stone:#8a8a8a;
+  --emerald:#17c964;
+  --emerald-dark:#0e8a45;
+  --gold:#ffcf4d;
+  --gold-dark:#d9a021;
+  --diamond:#5ce8e0;
+  --red:#e5484d;
+  --paper:#f5eedc;
+  --paper-line:#d9cba8;
+  --ink:#2b2417;
+  --white:#f4f6ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:#05070f;
+  color:var(--white);
+  overflow:hidden;
+}
+.pixel{font-family:'DotGothic16',sans-serif;}
+.px-en{font-family:'Press Start 2P',monospace;}
+img{display:block;max-width:100%;image-rendering:auto;}
+
+/* ============ ステージ（16:9） ============ */
+#stage{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.slide{
+  position:absolute;
+  width:100vw;height:56.25vw;      /* 16:9 */
+  max-height:100vh;max-width:177.78vh;
+  background:
+    radial-gradient(120% 100% at 50% -10%, #1b2350 0%, var(--night) 55%, #070a18 100%);
+  color:var(--white);
+  display:none;
+  padding:5.5vh 6vw;
+  overflow:hidden;
+}
+.slide.active{display:flex;flex-direction:column;justify-content:center;}
+/* マイクラの地面ライン */
+.slide::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:4.2vh;
+  background:
+    repeating-linear-gradient(90deg,var(--grass) 0 2.6vh,var(--grass-hi) 2.6vh 5.2vh);
+  border-top:0.5vh solid #0c1a08;
+  box-shadow:inset 0 0.5vh 0 rgba(255,255,255,.25),inset 0 -1.2vh 0 rgba(0,0,0,.25);
+}
+.slide.dirt::after{
+  background:repeating-linear-gradient(90deg,var(--dirt) 0 2.6vh,var(--dirt-dark) 2.6vh 5.2vh);
+}
+.slide.nofloor::after{display:none;}
+
+/* ============ 共通パーツ ============ */
+.kicker{
+  font-family:'Press Start 2P',monospace;
+  font-size:1.5vh;letter-spacing:.12em;color:var(--diamond);
+  text-shadow:0.3vh 0.3vh 0 #000;margin-bottom:2.2vh;
+}
+h1.title{
+  font-family:'DotGothic16',sans-serif;
+  font-size:8.2vh;line-height:1.1;letter-spacing:.02em;
+  text-shadow:0.6vh 0.6vh 0 rgba(0,0,0,.55);
+}
+h2.head{
+  font-family:'DotGothic16',sans-serif;
+  font-size:6.2vh;line-height:1.15;
+  text-shadow:0.5vh 0.5vh 0 rgba(0,0,0,.5);
+  margin-bottom:3.4vh;
+}
+.lead{font-size:3.4vh;line-height:1.7;font-weight:500;max-width:88%;}
+.big{font-size:4.4vh;line-height:1.6;font-weight:700;}
+.grass-txt{color:var(--grass-hi);}
+.gold-txt{color:var(--gold);}
+.dia-txt{color:var(--diamond);}
+.red-txt{color:#ff8a8d;}
+.sub{font-size:2.4vh;opacity:.85;font-weight:500;}
+
+/* ピクセルバッジ */
+.badge{
+  display:inline-block;font-family:'DotGothic16',sans-serif;
+  font-size:2.2vh;padding:1vh 2.4vh;background:var(--emerald);
+  color:#04240f;border:0.4vh solid #000;
+  box-shadow:inset 0.3vh 0.3vh 0 rgba(255,255,255,.45),inset -0.3vh -0.3vh 0 rgba(0,0,0,.3),0 0.8vh 0 #000;
+  letter-spacing:.06em;
+}
+.badge.gold{background:var(--gold);color:#3a2900;}
+.badge.dia{background:var(--diamond);color:#053b3a;}
+
+/* カード */
+.cards{display:flex;gap:3vh;flex-wrap:wrap;}
+.card{
+  background:rgba(255,255,255,.06);
+  border:0.4vh solid #000;
+  box-shadow:inset 0.3vh 0.3vh 0 rgba(255,255,255,.12),0 0.8vh 0 rgba(0,0,0,.4);
+  padding:2.6vh 3vh;flex:1;min-width:22vh;
+}
+.card .n{font-family:'Press Start 2P',monospace;font-size:2.4vh;color:var(--gold);text-shadow:0.3vh 0.3vh 0 #000;}
+.card .t{font-size:3.2vh;font-weight:700;margin:1.2vh 0 .6vh;}
+.card .d{font-size:2.1vh;opacity:.86;line-height:1.5;}
+
+/* ステップ横並び */
+.steps{display:flex;gap:2vh;align-items:stretch;margin-top:1vh;}
+.step{
+  flex:1;text-align:center;padding:2.6vh 1.4vh;
+  background:linear-gradient(180deg,rgba(111,195,73,.22),rgba(14,138,69,.12));
+  border:0.4vh solid #000;box-shadow:0 0.8vh 0 rgba(0,0,0,.4);
+}
+.step .no{font-family:'Press Start 2P',monospace;font-size:2.6vh;color:var(--grass-hi);text-shadow:0.3vh 0.3vh 0 #000;}
+.step .lb{font-size:3vh;font-weight:800;margin-top:1.4vh;}
+.step .em{font-size:4.6vh;margin-top:.6vh;}
+.step .ds{font-size:1.8vh;opacity:.8;margin-top:.8vh;line-height:1.4;}
+
+/* タイムテーブル */
+.tt{width:100%;border-collapse:collapse;font-size:2.7vh;}
+.tt td{padding:1.5vh 2vh;border-bottom:0.3vh solid rgba(255,255,255,.14);}
+.tt tr td:first-child{font-family:'DotGothic16',sans-serif;color:var(--diamond);white-space:nowrap;width:22%;}
+.tt tr td:last-child{text-align:right;color:var(--gold);white-space:nowrap;font-weight:700;}
+.tt tr.now td{background:rgba(255,207,77,.14);}
+
+/* 8ワールドグリッド */
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.2vh;margin-top:1vh;}
+.wtile{
+  text-align:center;padding:2.6vh 1vh;background:rgba(255,255,255,.05);
+  border:0.4vh solid #000;box-shadow:0 0.8vh 0 rgba(0,0,0,.4);
+}
+.wtile .ic{font-size:5.4vh;line-height:1;}
+.wtile .nm{font-size:2.8vh;font-weight:800;margin-top:1vh;font-family:'DotGothic16',sans-serif;}
+
+/* 主催ロゴ */
+.orgs{display:flex;gap:5vh;align-items:center;justify-content:center;margin-top:2vh;flex-wrap:wrap;}
+.org{text-align:center;background:rgba(255,255,255,.9);border:0.5vh solid #000;box-shadow:0 1vh 0 rgba(0,0,0,.4);padding:2.6vh 3.4vh;border-radius:1vh;}
+.org img{height:11vh;margin:0 auto 1.4vh;}
+.org .cap{color:#111;font-weight:800;font-size:2.3vh;}
+.org .cap small{display:block;font-weight:600;font-size:1.6vh;opacity:.7;}
+.orgx{font-size:6vh;color:var(--gold);font-family:'DotGothic16',sans-serif;text-shadow:0.4vh 0.4vh 0 #000;}
+
+/* 講師 */
+.speaker{display:flex;gap:5vh;align-items:center;}
+.speaker img{width:26vh;height:26vh;object-fit:cover;border:0.6vh solid #000;box-shadow:0 1.2vh 0 rgba(0,0,0,.4);border-radius:1vh;}
+
+/* タイマー */
+.timer-wrap{display:flex;flex-direction:column;align-items:center;gap:2vh;margin-top:1vh;}
+.timer-disp{
+  font-family:'Press Start 2P',monospace;
+  font-size:16vh;line-height:1;color:var(--grass-hi);
+  text-shadow:0.8vh 0.8vh 0 #000,0 0 4vh rgba(142,224,106,.4);
+  letter-spacing:.04em;
+}
+.timer-disp.warn{color:var(--gold);text-shadow:0.8vh 0.8vh 0 #000,0 0 4vh rgba(255,207,77,.5);}
+.timer-disp.over{color:#ff6b6e;animation:blink .7s steps(2) infinite;}
+@keyframes blink{50%{opacity:.25;}}
+.timer-btns{display:flex;gap:2vh;}
+.tbtn{
+  font-family:'DotGothic16',sans-serif;font-size:2.6vh;color:#fff;cursor:pointer;
+  padding:1.4vh 3.2vh;background:linear-gradient(180deg,#27d977,var(--emerald) 50%,var(--emerald-dark));
+  border:0.4vh solid #000;box-shadow:inset 0.3vh 0.3vh 0 rgba(255,255,255,.4),0 0.8vh 0 #000;
+  text-shadow:0.2vh 0.2vh 0 rgba(0,0,0,.5);letter-spacing:.06em;
+}
+.tbtn:active{transform:translateY(0.4vh);box-shadow:inset 0.3vh 0.3vh 0 rgba(255,255,255,.4),0 0.4vh 0 #000;}
+.tbtn.gold{background:linear-gradient(180deg,#ffe08a,var(--gold) 50%,var(--gold-dark));color:#3a2900;text-shadow:none;}
+
+/* 引き渡し・休憩 演出 */
+.center{text-align:center;align-items:center;}
+.hint{font-size:2vh;opacity:.6;margin-top:2vh;}
+.note-tag{
+  position:absolute;top:3vh;right:3vw;font-family:'DotGothic16',sans-serif;
+  font-size:1.8vh;background:var(--gold);color:#3a2900;padding:.8vh 1.8vh;border:0.3vh solid #000;
+}
+
+ul.checklist{list-style:none;font-size:3.4vh;line-height:1.9;}
+ul.checklist li{padding-left:5.6vh;position:relative;margin-bottom:1vh;}
+ul.checklist li::before{
+  content:"";position:absolute;left:0;top:1.2vh;width:3.2vh;height:3.2vh;
+  background:var(--grass);border:0.4vh solid #000;box-shadow:inset 0.25vh 0.25vh 0 rgba(255,255,255,.5);
+}
+
+/* ============ UI（ナビ） ============ */
+#hud{position:fixed;top:1.4vh;right:1.6vw;z-index:50;font-family:'Press Start 2P',monospace;
+  font-size:1.4vh;color:#bfe;pointer-events:none;text-shadow:1px 1px 0 #000;opacity:.8;}
+#pbar{position:fixed;top:0;left:0;height:0.7vh;background:var(--grass-hi);z-index:60;width:0;box-shadow:0 0 1vh var(--grass-hi);transition:width .25s;}
+#nav{position:fixed;bottom:5.6vh;right:1.4vw;z-index:60;display:flex;gap:1vh;opacity:.45;transition:opacity .2s;}
+#nav:hover{opacity:1;}
+#nav button{font-family:'Press Start 2P',monospace;font-size:1.6vh;color:#fff;cursor:pointer;
+  background:#1a2140;border:0.3vh solid #000;padding:1vh 1.6vh;box-shadow:0 0.5vh 0 #000;}
+.help{position:fixed;top:1.4vh;left:1.4vw;z-index:60;font-family:'Press Start 2P',monospace;
+  font-size:1.2vh;color:#9fb;opacity:.4;text-shadow:1px 1px 0 #000;}
+
+/* ============ 印刷（PDF） ============ */
+@media print{
+  @page{size:1280px 720px;margin:0;}
+  html,body{height:auto;overflow:visible;background:#fff;}
+  #hud,#nav,#pbar,.help{display:none!important;}
+  #stage{position:static;display:block;}
+  .slide{
+    display:flex!important;position:relative;flex-direction:column;justify-content:center;
+    width:1280px;height:720px;max-width:none;max-height:none;
+    page-break-after:always;break-after:page;padding:60px 72px;
+  }
+  .slide::after{height:46px;}
+  .timer-disp.over{animation:none;}
+}
+</style>
+</head>
+<body>
+<div id="pbar"></div>
+<div class="help px-en">← → : SLIDE ／ F : FULL ／ S : TIMER ／ R : RESET</div>
+
+<div id="stage">
+
+  <!-- 01 表紙 -->
+  <section class="slide active center nofloor" style="background:radial-gradient(130% 110% at 50% 0%,#25306a 0%,var(--night) 55%,#05070f 100%);">
+    <div class="kicker px-en">2026.08.08 SAT ・ KYOTO KEIZAI CENTER / KOIN</div>
+    <div class="badge gold" style="margin-bottom:3.2vh;">参加無料 ・ 小4〜中3</div>
+    <h1 class="title pixel">マイクラ<span class="grass-txt">×</span>探究<br><span class="gold-txt">防災キャンプ 2026</span></h1>
+    <p class="big pixel" style="margin-top:3vh;">きみのまちを、きみが守れ。</p>
+    <p class="sub" style="margin-top:3vh;">共同主催　京大マインクラフト同好会 KUMC ／ Kyoto AI×Edu Lab（KAEL）</p>
+  </section>
+
+  <!-- 02 ようこそ -->
+  <section class="slide">
+    <div class="kicker px-en">WELCOME</div>
+    <h2 class="head pixel">ようこそ、<span class="grass-txt">冒険者</span>のみんな！</h2>
+    <p class="lead">今日はマインクラフトの世界で<br>
+      <span class="gold-txt big">「防災（ぼうさい）」</span>を学ぶ、特別な150分。</p>
+    <p class="lead" style="margin-top:2.6vh;">ゲームで遊びながら、まちを<span class="dia-txt">安全</span>にする力をつけよう。<br>思いっきり楽しんでいこう！</p>
+  </section>
+
+  <!-- 03 主催者紹介 -->
+  <section class="slide center">
+    <div class="kicker px-en">ORGANIZERS</div>
+    <h2 class="head pixel">このキャンプをつくった2チーム</h2>
+    <div class="orgs">
+      <div class="org">
+        <img src="assets/kumc_logo.png" alt="KUMC">
+        <div class="cap">KUMC<small>京大マインクラフト同好会</small><small>マイクラのプロ集団</small></div>
+      </div>
+      <div class="orgx pixel">×</div>
+      <div class="org">
+        <img src="assets/kael_logo.png" alt="KAEL">
+        <div class="cap">KAEL<small>Kyoto AI×Edu Lab</small><small>学びをデザインする探究の専門家</small></div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:3vh;">現役京大生 × 探究学習の先生が、いっしょにつくりました。</p>
+  </section>
+
+  <!-- 04 講師紹介 -->
+  <section class="slide">
+    <div class="kicker px-en">YOUR GUIDE</div>
+    <div class="speaker">
+      <img src="assets/kitada_profile.jpg" alt="北田朋也">
+      <div>
+        <h2 class="head pixel" style="margin-bottom:2vh;">きょうの<span class="gold-txt">案内人</span></h2>
+        <p class="big">北田 朋也（きただ ともや）</p>
+        <p class="lead" style="margin-top:1.4vh;">探究学習の先生・教育コーディネーター（京都）</p>
+        <p class="lead grass-txt" style="margin-top:2.6vh;">「身近な“あぶない”を見つける名人に<br>みんなでなろう！」</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 タイムテーブル -->
+  <section class="slide dirt">
+    <div class="kicker px-en">TODAY'S MAP</div>
+    <h2 class="head pixel">150分の<span class="gold-txt">冒険マップ</span></h2>
+    <table class="tt">
+      <tr><td>アイスブレイク</td><td>もし、災害が起きたら？</td><td>15分</td></tr>
+      <tr><td>防災レクチャー</td><td>「防災」ってなんだろう？</td><td>10分</td></tr>
+      <tr><td>課題ミッション</td><td>危険を見つけて、直し方を考える</td><td>30分</td></tr>
+      <tr><td>休憩</td><td>水分・トイレ</td><td>10分</td></tr>
+      <tr><td>制作ミッション</td><td>マイクラで対策をつくる</td><td>40分</td></tr>
+      <tr><td>発表</td><td>つくったものをみんなに伝える</td><td>15分</td></tr>
+      <tr><td>まとめ</td><td>気づきをおうち・地域へ</td><td>10分</td></tr>
+    </table>
+  </section>
+
+  <!-- 06 5ステップ -->
+  <section class="slide">
+    <div class="kicker px-en">YOUR MISSION</div>
+    <h2 class="head pixel">きみのミッションは<span class="grass-txt">5つのステップ</span></h2>
+    <div class="steps">
+      <div class="step"><div class="no">01</div><div class="em">👀</div><div class="lb">気づく</div><div class="ds">身近なリスクに気づく</div></div>
+      <div class="step"><div class="no">02</div><div class="em">🤔</div><div class="lb">考える</div><div class="ds">なぜ危険なのか</div></div>
+      <div class="step"><div class="no">03</div><div class="em">💡</div><div class="lb">改善する</div><div class="ds">どう直せるか</div></div>
+      <div class="step"><div class="no">04</div><div class="em">⛏️</div><div class="lb">つくる</div><div class="ds">マイクラで対策を制作</div></div>
+      <div class="step"><div class="no">05</div><div class="em">📢</div><div class="lb">伝える</div><div class="ds">制作意図を発表</div></div>
+    </div>
+  </section>
+
+  <!-- 07 アイスブレイク -->
+  <section class="slide nofloor" style="background:radial-gradient(120% 100% at 50% 0%,#3a2340,#1a0f22 70%,#05070f);">
+    <div class="note-tag pixel">▶ 京都の災害写真を差し込み</div>
+    <div class="kicker px-en">ICE BREAK</div>
+    <h2 class="head pixel">もし、きみのまちで<br><span class="red-txt">災害</span>が起きたら…？</h2>
+    <p class="lead">これは、2017年に京都・嵐山で起きた大雨のときの写真。<br>
+      いつもの渡月橋（とげつきょう）が、水につかってしまいました。</p>
+    <p class="lead gold-txt" style="margin-top:2.6vh;">災害は、遠い国の話じゃない。<span class="dia-txt">きみのまち</span>でも起きる。</p>
+    <p class="hint">※ ここに 2017年豪雨・渡月橋／嵐山の写真（_assets/ に保存し ![[…]] 相当を差し込み）</p>
+  </section>
+
+  <!-- 08 防災レクチャー -->
+  <section class="slide">
+    <div class="kicker px-en">LECTURE</div>
+    <h2 class="head pixel">そもそも「防災」ってなに？</h2>
+    <p class="big">災害は、<span class="red-txt">ふせぐ</span>より <span class="grass-txt">そなえる</span>。</p>
+    <div class="cards" style="margin-top:3vh;">
+      <div class="card"><div class="n">STEP1</div><div class="t">気づく</div><div class="d">どこが危ない？ 何が起きる？</div></div>
+      <div class="card"><div class="n">STEP2</div><div class="t">そなえる</div><div class="d">起きる前に、準備しておく</div></div>
+      <div class="card"><div class="n">STEP3</div><div class="t">まもる</div><div class="d">自分と大切な人を守る</div></div>
+    </div>
+    <p class="lead gold-txt" style="margin-top:3vh;">マイクラは「きっかけ」。今日の気づきを、<span class="dia-txt">おうちや地域</span>でも探そう。</p>
+  </section>
+
+  <!-- 09 8つの課題ワールド -->
+  <section class="slide dirt">
+    <div class="kicker px-en">8 WORLDS</div>
+    <h2 class="head pixel">8つのワールドに、<span class="red-txt">かくれた危険</span></h2>
+    <div class="wgrid">
+      <div class="wtile"><div class="ic">🔥</div><div class="nm">火災</div></div>
+      <div class="wtile"><div class="ic">🌊</div><div class="nm">洪水</div></div>
+      <div class="wtile"><div class="ic">🚧</div><div class="nm">未整備</div></div>
+      <div class="wtile"><div class="ic">🚪</div><div class="nm">避難路</div></div>
+      <div class="wtile"><div class="ic">🏚️</div><div class="nm">地震</div></div>
+      <div class="wtile"><div class="ic">🌊</div><div class="nm">津波</div></div>
+      <div class="wtile"><div class="ic">⛰️</div><div class="nm">土砂災害</div></div>
+      <div class="wtile"><div class="ic">💡</div><div class="nm">停電・断水</div></div>
+    </div>
+    <p class="lead" style="margin-top:2.6vh;">きみのワールドにかくれた危険を、まず<span class="grass-txt">見つけよう</span>。</p>
+  </section>
+
+  <!-- 10 ワークの流れ -->
+  <section class="slide">
+    <div class="kicker px-en">HOW TO PLAY</div>
+    <h2 class="head pixel">冒険の進め方</h2>
+    <div class="cards">
+      <div class="card"><div class="n">1</div><div class="t">探検</div><div class="d">ワールドを歩いて危険をさがす</div></div>
+      <div class="card"><div class="n">2</div><div class="t">考える</div><div class="d">なぜ危ない？を考える</div></div>
+      <div class="card"><div class="n">3</div><div class="t">作戦</div><div class="d">どう直すか作戦を立てる</div></div>
+      <div class="card"><div class="n">4</div><div class="t">つくる</div><div class="d">マイクラで対策を制作</div></div>
+      <div class="card"><div class="n">5</div><div class="t">発表</div><div class="d">みんなに伝える</div></div>
+    </div>
+  </section>
+
+  <!-- 11 ワークシート -->
+  <section class="slide">
+    <div class="kicker px-en">WORKSHEET</div>
+    <h2 class="head pixel">ワークシートの<span class="gold-txt">使い方</span></h2>
+    <div class="cards" style="align-items:stretch;">
+      <div class="card" style="background:rgba(229,72,77,.14);"><div class="n" style="color:#ff8a8d;">BEFORE</div><div class="t">左：いまのワールド</div><div class="d">見つけた危険を、絵や言葉で書こう。「ここが危ない！」</div></div>
+      <div class="card" style="background:rgba(111,195,73,.16);"><div class="n" style="color:var(--grass-hi);">AFTER</div><div class="t">右：きみが直したあと</div><div class="d">どう直すか、アイデアを書こう。絵でも言葉でもOK！</div></div>
+    </div>
+    <p class="lead" style="margin-top:3vh;">つくる前に、頭の中の作戦を<span class="dia-txt">紙に出す</span>のがコツ。</p>
+  </section>
+
+  <!-- 12 約束 -->
+  <section class="slide dirt">
+    <div class="kicker px-en">RULES</div>
+    <h2 class="head pixel">たのしむための<span class="gold-txt">4つの約束</span></h2>
+    <ul class="checklist">
+      <li>自分のエリアの中で活動しよう</li>
+      <li>ほかの人のものを、こわさない</li>
+      <li>こまったら、近くのスタッフに聞こう</li>
+      <li>発表までに、ひとつ完成させよう</li>
+    </ul>
+  </section>
+
+  <!-- 13 引き渡し（KUMCへ） -->
+  <section class="slide center nofloor" style="background:radial-gradient(120% 100% at 50% 0%,#12324a,#0b1a2e 70%,#05070f);">
+    <div class="note-tag pixel">▶ この後 KUMC 操作説明スライドへ</div>
+    <div class="kicker px-en">LET'S PLAY MINECRAFT</div>
+    <h2 class="head pixel">それじゃあ、<span class="grass-txt">動かし方</span>を覚えよう！</h2>
+    <p class="big">マイクラの操作は、<br><span class="gold-txt">マイクラ同好会</span>のみんなに聞いてみよう。</p>
+    <p class="hint">※ ここから KUMC 作成「操作説明スライド」に切り替え（別ファイル）</p>
+  </section>
+
+  <!-- 14 休憩タイマー -->
+  <section class="slide center timer" data-min="10">
+    <div class="kicker px-en">BREAK TIME</div>
+    <h2 class="head pixel">☕ 休憩タイム</h2>
+    <div class="timer-wrap">
+      <div class="timer-disp">10:00</div>
+      <div class="timer-btns">
+        <button class="tbtn" data-act="toggle">▶ スタート / 一時停止（S）</button>
+        <button class="tbtn gold" data-act="reset">⟲ リセット（R）</button>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:2.4vh;">水分ほきゅう・トイレをすませよう。時間になったら席にもどってね。</p>
+  </section>
+
+  <!-- 15 課題ミッション タイマー -->
+  <section class="slide center timer dirt" data-min="30">
+    <div class="kicker px-en">MISSION 1 ・ FIND & PLAN</div>
+    <h2 class="head pixel">危険を見つけて、<span class="gold-txt">直し方</span>を考えよう</h2>
+    <div class="timer-wrap">
+      <div class="timer-disp">30:00</div>
+      <div class="timer-btns">
+        <button class="tbtn" data-act="toggle">▶ スタート / 一時停止（S）</button>
+        <button class="tbtn gold" data-act="reset">⟲ リセット（R）</button>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:2.4vh;">ワールドを探検 → ワークシートに BEFORE / AFTER を書こう。</p>
+  </section>
+
+  <!-- 16 制作ミッション タイマー -->
+  <section class="slide center timer" data-min="40">
+    <div class="kicker px-en">MISSION 2 ・ BUILD</div>
+    <h2 class="head pixel">マイクラで<span class="grass-txt">対策</span>をつくろう</h2>
+    <div class="timer-wrap">
+      <div class="timer-disp">40:00</div>
+      <div class="timer-btns">
+        <button class="tbtn" data-act="toggle">▶ スタート / 一時停止（S）</button>
+        <button class="tbtn gold" data-act="reset">⟲ リセット（R）</button>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:2.4vh;">作戦をかたちに！ 発表までに、ひとつ完成をめざそう。</p>
+  </section>
+
+  <!-- 17 発表のしかた -->
+  <section class="slide">
+    <div class="kicker px-en">HOW TO PRESENT</div>
+    <h2 class="head pixel">発表の<span class="gold-txt">コツ</span>（30秒でOK）</h2>
+    <div class="cards">
+      <div class="card"><div class="n">1</div><div class="t">どんな危険？</div><div class="d">ワールドで見つけた危険を紹介</div></div>
+      <div class="card"><div class="n">2</div><div class="t">どう直した？</div><div class="d">つくった対策を見せる</div></div>
+      <div class="card"><div class="n">3</div><div class="t">くふうは？</div><div class="d">がんばったポイントを一言</div></div>
+    </div>
+    <p class="lead dia-txt" style="margin-top:3vh;">同じ課題でも、見つけたポイントは人それぞれ。それがおもしろい！</p>
+  </section>
+
+  <!-- 18 発表タイマー -->
+  <section class="slide center timer dirt" data-min="15">
+    <div class="kicker px-en">SHOW TIME</div>
+    <h2 class="head pixel">📢 グループ発表タイム</h2>
+    <div class="timer-wrap">
+      <div class="timer-disp">15:00</div>
+      <div class="timer-btns">
+        <button class="tbtn" data-act="toggle">▶ スタート / 一時停止（S）</button>
+        <button class="tbtn gold" data-act="reset">⟲ リセット（R）</button>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:2.4vh;">発表する人に、あたたかい拍手を！ 👏</p>
+  </section>
+
+  <!-- 19 まとめ -->
+  <section class="slide">
+    <div class="kicker px-en">WRAP UP</div>
+    <h2 class="head pixel">今日の<span class="gold-txt">まとめ</span></h2>
+    <p class="big grass-txt">きみは今日、「危険に気づく名人」になった。</p>
+    <p class="lead" style="margin-top:2.6vh;">帰り道、おうち、学校、通学路…<br>
+      きみのまわりにも、同じ危険がかくれているかも。</p>
+    <p class="big gold-txt" style="margin-top:2.6vh;">それを探してみること。<br>それが、本当の<span class="dia-txt">防災</span>。</p>
+  </section>
+
+  <!-- 20 次回案内 + LINE -->
+  <section class="slide">
+    <div class="kicker px-en">SEE YOU AGAIN</div>
+    <h2 class="head pixel">また、あおう！</h2>
+    <div class="speaker" style="align-items:center;">
+      <div>
+        <p class="big">これからのイベント</p>
+        <ul class="checklist" style="font-size:2.8vh;margin-top:1.4vh;">
+          <li>京都 学び育みマルシェ 2026</li>
+          <li>京大11月祭（NF）</li>
+        </ul>
+        <p class="lead gold-txt" style="margin-top:1.6vh;">公式LINE「マイクラ×探究」で<br>次回のお知らせが届くよ →</p>
+      </div>
+      <div class="org" style="background:#fff;">
+        <img src="assets/line_qr.png" alt="公式LINE QR" style="height:24vh;">
+        <div class="cap" style="margin-top:1vh;">公式LINE<small>マイクラ×探究</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 クロージング -->
+  <section class="slide center nofloor" style="background:radial-gradient(130% 110% at 50% 0%,#25306a 0%,var(--night) 55%,#05070f 100%);">
+    <div class="kicker px-en">THANK YOU</div>
+    <h1 class="title pixel" style="font-size:9vh;">ありがとう！</h1>
+    <p class="big pixel gold-txt" style="margin-top:3vh;">きみのまちを、きみが守れ。</p>
+    <div class="orgs" style="margin-top:4vh;">
+      <img src="assets/kumc_logo.png" style="height:9vh;background:#fff;padding:1.2vh;border:0.4vh solid #000;">
+      <div class="orgx pixel" style="font-size:4vh;">×</div>
+      <img src="assets/kael_logo.png" style="height:9vh;background:#fff;padding:1.2vh;border:0.4vh solid #000;">
+    </div>
+  </section>
+
+</div>
+
+<div id="hud"><span class="l px-en"></span></div>
+<div id="nav">
+  <button id="prev">◀</button>
+  <button id="next">▶</button>
+</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var i=0, N=slides.length;
+  var pbar=document.getElementById('pbar');
+  var hudL=document.querySelector('#hud .l');
+
+  function show(n){
+    i=Math.max(0,Math.min(N-1,n));
+    slides.forEach(function(s,k){s.classList.toggle('active',k===i);});
+    pbar.style.width=((i)/(N-1)*100)+'%';
+    hudL.textContent=('0'+(i+1)).slice(-2)+' / '+N;
+    resetTimerUI();
+  }
+  function next(){show(i+1);}
+  function prev(){show(i-1);}
+
+  // ===== タイマー =====
+  var tick=null, remain=0, running=false;
+  function curTimerSlide(){var s=slides[i];return s.classList.contains('timer')?s:null;}
+  function fmt(sec){var m=Math.floor(Math.abs(sec)/60),s=Math.abs(sec)%60;
+    return (sec<0?'-':'')+('0'+m).slice(-2)+':'+('0'+s).slice(-2);}
+  function paint(){
+    var slide=curTimerSlide(); if(!slide)return;
+    var d=slide.querySelector('.timer-disp');
+    d.textContent=fmt(remain);
+    d.classList.toggle('warn',remain<=60&&remain>0);
+    d.classList.toggle('over',remain<=0);
+  }
+  function resetTimerUI(){
+    if(tick){clearInterval(tick);tick=null;} running=false;
+    var slide=curTimerSlide();
+    if(slide){remain=parseInt(slide.getAttribute('data-min'),10)*60; paint();}
+  }
+  function toggleTimer(){
+    var slide=curTimerSlide(); if(!slide)return;
+    if(running){clearInterval(tick);tick=null;running=false;return;}
+    running=true;
+    tick=setInterval(function(){remain--;paint();},1000);
+  }
+  function resetTimer(){resetTimerUI();}
+
+  // ボタン
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-act]'); if(!b)return;
+    if(b.getAttribute('data-act')==='toggle')toggleTimer();
+    else resetTimer();
+  });
+  document.getElementById('next').onclick=next;
+  document.getElementById('prev').onclick=prev;
+
+  // キー操作
+  document.addEventListener('keydown',function(e){
+    switch(e.key){
+      case 'ArrowRight':case 'PageDown':case ' ': e.preventDefault(); next(); break;
+      case 'ArrowLeft':case 'PageUp': e.preventDefault(); prev(); break;
+      case 'Home': show(0); break;
+      case 'End': show(N-1); break;
+      case 's':case 'S': toggleTimer(); break;
+      case 'r':case 'R': resetTimer(); break;
+      case 'f':case 'F':
+        if(!document.fullscreenElement)document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+        break;
+    }
+  });
+
+  show(0);
+})();
+</script>
+</body>
+</html>
